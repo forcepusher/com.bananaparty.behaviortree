@@ -1,0 +1,18 @@
+{
+    "name": "BananaParty.BehaviorTree.Tests",
+    "rootNamespace": "",
+    "references": [
+        "GUID:9503a1d62ef696340b44109afe91fb39"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

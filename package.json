@@ -1,0 +1,8 @@
+{
+  "name": "com.bananaparty.behaviortree",
+  "version": "1.0.0",
+  "type": "library",
+  "displayName": "Behavior Tree",
+  "unity": "2021.2",
+  "description": "Behavior tree implementation."
+}
