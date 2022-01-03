@@ -4,8 +4,8 @@
     {
         public void StartChildGroup(int childCount);
 
-        public void EndChildGroup(int childCount);
+        public void Write(string nodeInfo, NodeExecutionStatus nodeExecutionStatus);
 
-        public void Write(string nodeInfo, int runningChildNodeIndex = -1);
+        public void EndChildGroup();
     }
 }

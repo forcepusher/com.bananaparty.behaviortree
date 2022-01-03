@@ -1,8 +1,8 @@
 ﻿namespace BehaviorTree
 {
-    public class SequenceNode : SequentialCompositeNode
+    public class SelectorNode : SequentialCompositeNode
     {
-        public SequenceNode(IBehaviorNode[] childNodes, bool alwaysReevaluate = false) : base(childNodes, alwaysReevaluate) { }
+        public SelectorNode(IBehaviorNode[] childNodes, bool alwaysReevaluate = false) : base(childNodes, alwaysReevaluate) { }
 
         public override NodeExecutionStatus OnExecute(long time)
         {
@@ -13,7 +13,7 @@
             {
                 NodeExecutionStatus childNodeStatus = ChildNodes[childIterator].Execute(time);
 
-                if (childNodeStatus != NodeExecutionStatus.Success)
+                if (childNodeStatus != NodeExecutionStatus.Failure)
                 {
                     // Interrupt nodes in front on failed reevaluation.
                     for (int childToResetIterator = childIterator + 1;
@@ -24,7 +24,7 @@
                 }
             }
 
-            return NodeExecutionStatus.Success;
+            return NodeExecutionStatus.Failure;
         }
     }
 }

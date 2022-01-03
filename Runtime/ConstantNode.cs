@@ -1,6 +1,6 @@
 ﻿namespace BehaviorTree
 {
-    public class ConstantNode : IBehaviorNode
+    public class ConstantNode : BehaviorNode
     {
         private readonly NodeExecutionStatus _statusToReturn;
 
@@ -9,16 +9,9 @@
             _statusToReturn = statusToReturn;
         }
 
-        public NodeExecutionStatus Execute(long tickNumber)
+        public override NodeExecutionStatus OnExecute(long time)
         {
             return _statusToReturn;
-        }
-
-        public NodeExecutionStatus Interrupt(long time) => _statusToReturn;
-
-        public void WriteToGraph(INodeGraph nodeGraph)
-        {
-            nodeGraph.Write(nameof(SequenceNode));
         }
     }
 }
