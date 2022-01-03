@@ -2,9 +2,9 @@
 {
     public interface IRollbackBehaviorNode<TSnapshot> : IBehaviorNode where TSnapshot : ISnapshot
     {
-        public void Restore(TSnapshot snapshot);
-
         public TSnapshot Save();
+
+        public void Restore(TSnapshot snapshot);
     }
 
     public interface IRollbackBehaviorNode : IRollbackBehaviorNode<ISnapshot> { }

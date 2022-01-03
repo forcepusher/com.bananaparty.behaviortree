@@ -2,12 +2,12 @@
 {
     public readonly struct SequenceNodeSnapshot : ISnapshot
     {
-        public readonly int RunningChildNodeIndex;
+        public readonly int RunningChildIndex;
         public readonly ISnapshot[] ChildSnapshots;
 
-        public SequenceNodeSnapshot(int runningChildNodeIndex, ISnapshot[] childSnapshots)
+        public SequenceNodeSnapshot(int runningChildIndex, ISnapshot[] childSnapshots)
         {
-            RunningChildNodeIndex = runningChildNodeIndex;
+            RunningChildIndex = runningChildIndex;
             ChildSnapshots = childSnapshots;
         }
     }

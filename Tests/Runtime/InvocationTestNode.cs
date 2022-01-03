@@ -11,7 +11,7 @@
             _statusToReturn = statusToReturn;
         }
 
-        public NodeExecutionStatus Execute(long tickNumber)
+        public NodeExecutionStatus Execute(long time)
         {
             ExecutionCount += 1;
             return _statusToReturn;

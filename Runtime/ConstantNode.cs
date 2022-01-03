@@ -9,16 +9,9 @@
             _statusToReturn = statusToReturn;
         }
 
-        public NodeExecutionStatus Execute(long tickNumber)
+        public NodeExecutionStatus Execute(long time)
         {
             return _statusToReturn;
-        }
-
-        public NodeExecutionStatus Interrupt(long time) => _statusToReturn;
-
-        public void WriteToGraph(INodeGraph nodeGraph)
-        {
-            nodeGraph.Write(nameof(SequenceNode));
         }
     }
 }

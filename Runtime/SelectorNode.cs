@@ -1,13 +1,13 @@
 ﻿namespace BehaviorTree
 {
-    public class SequenceNode : IBehaviorNode
+    public class SelectorNode : IBehaviorNode
     {
         private readonly IBehaviorNode[] _childNodes;
         private readonly bool _alwaysReset;
 
         protected int RunningChildIndex = -1;
 
-        public SequenceNode(IBehaviorNode[] childNodes, bool alwaysReset = false)
+        public SelectorNode(IBehaviorNode[] childNodes, bool alwaysReset = false)
         {
             _childNodes = childNodes;
             _alwaysReset = alwaysReset;
@@ -21,7 +21,7 @@
             while (++RunningChildIndex < _childNodes.Length)
             {
                 NodeExecutionStatus childNodeStatus = _childNodes[RunningChildIndex].Execute(time);
-                if (childNodeStatus != NodeExecutionStatus.Success)
+                if (childNodeStatus != NodeExecutionStatus.Failure)
                 {
                     if (childNodeStatus != NodeExecutionStatus.Running)
                         RunningChildIndex = -1;
@@ -37,7 +37,7 @@
 
         public void WriteToGraph(INodeGraph nodeGraph)
         {
-            nodeGraph.Write(nameof(SequenceNode), RunningChildIndex);
+            nodeGraph.Write(nameof(SelectorNode), RunningChildIndex);
             nodeGraph.StartChildGroup(_childNodes.Length);
 
             foreach (IBehaviorNode childNode in _childNodes)

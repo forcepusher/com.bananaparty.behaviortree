@@ -9,21 +9,21 @@
             _childNodes = childNodes;
         }
 
-        public void Restore(SequenceNodeSnapshot snapshot)
-        {
-            RunningChildNodeIndex = snapshot.RunningChildNodeIndex;
-
-            for (int childIterator = 0; childIterator < _childNodes.Length; childIterator += 1)
-                _childNodes[childIterator].Restore(snapshot.ChildSnapshots[childIterator]);
-        }
-
         public SequenceNodeSnapshot Save()
         {
             var snapshots = new ISnapshot[_childNodes.Length];
             for (int childIterator = 0; childIterator < _childNodes.Length; childIterator += 1)
                 snapshots[childIterator] = _childNodes[childIterator].Save();
 
-            return new SequenceNodeSnapshot(RunningChildNodeIndex, snapshots);
+            return new SequenceNodeSnapshot(RunningChildIndex, snapshots);
+        }
+
+        public void Restore(SequenceNodeSnapshot snapshot)
+        {
+            RunningChildIndex = snapshot.RunningChildIndex;
+
+            for (int childIterator = 0; childIterator < _childNodes.Length; childIterator += 1)
+                _childNodes[childIterator].Restore(snapshot.ChildSnapshots[childIterator]);
         }
     }
 }
