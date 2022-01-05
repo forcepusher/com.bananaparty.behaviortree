@@ -1,13 +1,13 @@
 ﻿namespace BehaviorTree.Rollback
 {
-    public readonly struct SequenceNodeSnapshot : ISnapshot
+    public readonly struct SequenceNodeSnapshot : IBehaviorNodeSnapshot
     {
-        public readonly int RunningChildIndex;
-        public readonly ISnapshot[] ChildSnapshots;
+        public readonly NodeExecutionStatus Status;
+        public readonly IBehaviorNodeSnapshot[] ChildSnapshots;
 
-        public SequenceNodeSnapshot(int runningChildIndex, ISnapshot[] childSnapshots)
+        public SequenceNodeSnapshot(NodeExecutionStatus status, IBehaviorNodeSnapshot[] childSnapshots)
         {
-            RunningChildIndex = runningChildIndex;
+            Status = status;
             ChildSnapshots = childSnapshots;
         }
     }

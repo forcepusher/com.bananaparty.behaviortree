@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace BehaviorTree.Tests
 {
-    public class SequenceTests
+    public class SequenceNodeTests
     {
         [Test]
         public void ShouldExecuteAllChildrenOnce()

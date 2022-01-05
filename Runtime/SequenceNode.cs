@@ -1,49 +1,30 @@
 ﻿namespace BehaviorTree
 {
-    public class SequenceNode : IBehaviorNode
+    public class SequenceNode : SequentialCompositeNode
     {
-        private readonly IBehaviorNode[] _childNodes;
-        private readonly bool _alwaysReset;
+        public SequenceNode(IBehaviorNode[] childNodes, bool alwaysReevaluate = false) : base(childNodes, alwaysReevaluate) { }
 
-        protected int RunningChildIndex = -1;
-
-        public SequenceNode(IBehaviorNode[] childNodes, bool alwaysReset = false)
+        public override NodeExecutionStatus OnExecute(long time)
         {
-            _childNodes = childNodes;
-            _alwaysReset = alwaysReset;
-        }
+            int runningChildIndex = RunningChildIndex;
 
-        public NodeExecutionStatus Execute(long time)
-        {
-            if (_alwaysReset)
-                RunningChildIndex = -1;
-
-            while (++RunningChildIndex < _childNodes.Length)
+            for (int childIterator = (AlwaysReevaluate || runningChildIndex == -1) ? 0 : runningChildIndex;
+                childIterator < ChildNodes.Length; childIterator += 1)
             {
-                NodeExecutionStatus childNodeStatus = _childNodes[RunningChildIndex].Execute(time);
+                NodeExecutionStatus childNodeStatus = ChildNodes[childIterator].Execute(time);
+
                 if (childNodeStatus != NodeExecutionStatus.Success)
                 {
-                    if (childNodeStatus != NodeExecutionStatus.Running)
-                        RunningChildIndex = -1;
+                    // Interrupt nodes in front on failed reevaluation.
+                    for (int childToResetIterator = childIterator + 1;
+                        childToResetIterator <= runningChildIndex; childToResetIterator += 1)
+                        ChildNodes[childToResetIterator].Reset();
 
                     return childNodeStatus;
                 }
             }
 
-            RunningChildIndex = -1;
-
             return NodeExecutionStatus.Success;
-        }
-
-        public void WriteToGraph(INodeGraph nodeGraph)
-        {
-            nodeGraph.Write(nameof(SequenceNode), RunningChildIndex);
-            nodeGraph.StartChildGroup(_childNodes.Length);
-
-            foreach (IBehaviorNode childNode in _childNodes)
-                childNode.WriteToGraph(nodeGraph);
-
-            nodeGraph.EndChildGroup();
         }
     }
 }

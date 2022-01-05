@@ -1,23 +1,40 @@
 ﻿namespace BehaviorTree
 {
-    public class InverterNode : IBehaviorNode
+    public class InverterNode : BehaviorNode
     {
         private readonly IBehaviorNode _childNode;
+
+        protected NodeExecutionStatus ChildStatus;
 
         public InverterNode(IBehaviorNode childNode)
         {
             _childNode = childNode;
         }
 
-        public NodeExecutionStatus Execute(long time)
+        public override NodeExecutionStatus OnExecute(long time)
         {
-            NodeExecutionStatus childResult = _childNode.Execute(time);
-            return childResult switch
+            ChildStatus = _childNode.Execute(time);
+
+            return ChildStatus switch
             {
                 NodeExecutionStatus.Success => NodeExecutionStatus.Failure,
                 NodeExecutionStatus.Failure => NodeExecutionStatus.Success,
-                _ => childResult,
+                _ => ChildStatus,
             };
+        }
+
+        public override void OnReset()
+        {
+            _childNode.Reset();
+        }
+
+        public override void WriteToGraph(INodeGraph nodeGraph)
+        {
+            base.WriteToGraph(nodeGraph);
+
+            nodeGraph.StartChildGroup(1);
+            _childNode.WriteToGraph(nodeGraph);
+            nodeGraph.EndChildGroup();
         }
     }
 }

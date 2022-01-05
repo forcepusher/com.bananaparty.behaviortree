@@ -4,8 +4,8 @@
     {
         public ConstantRollbackNode(NodeExecutionStatus statusToReturn) : base(statusToReturn) { }
 
-        public ISnapshot Save() { return new EmptySnapshot(); }
+        public IBehaviorNodeSnapshot Save() { return new EmptyNodeSnapshot(); }
 
-        public void Restore(ISnapshot snapshot) { }
+        public void Restore(IBehaviorNodeSnapshot snapshot) { }
     }
 }
