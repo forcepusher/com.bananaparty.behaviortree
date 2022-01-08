@@ -1,7 +1,7 @@
 using System.Linq;
 using NUnit.Framework;
 
-namespace BehaviorTree.Tests
+namespace BananaParty.BehaviorTree.Tests
 {
     public class SequenceNodeTests
     {
@@ -10,9 +10,9 @@ namespace BehaviorTree.Tests
         {
             InvocationTestNode[] testNodes = new[]
             {
-                new InvocationTestNode(NodeExecutionStatus.Success),
-                new InvocationTestNode(NodeExecutionStatus.Success),
-                new InvocationTestNode(NodeExecutionStatus.Success)
+                new InvocationTestNode(BehaviorNodeStatus.Success),
+                new InvocationTestNode(BehaviorNodeStatus.Success),
+                new InvocationTestNode(BehaviorNodeStatus.Success)
             };
 
             var sequence = new SequenceNode(testNodes);
