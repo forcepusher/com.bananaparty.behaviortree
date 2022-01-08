@@ -10,9 +10,9 @@ namespace BehaviorTree.Tests
         {
             InvocationTestNode[] testNodes = new[]
             {
-                new InvocationTestNode(NodeExecutionStatus.Success),
-                new InvocationTestNode(NodeExecutionStatus.Success),
-                new InvocationTestNode(NodeExecutionStatus.Success)
+                new InvocationTestNode(BehaviorNodeStatus.Success),
+                new InvocationTestNode(BehaviorNodeStatus.Success),
+                new InvocationTestNode(BehaviorNodeStatus.Success)
             };
 
             var sequence = new SequenceNode(testNodes);

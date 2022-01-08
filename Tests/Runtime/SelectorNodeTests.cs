@@ -10,13 +10,13 @@ namespace BehaviorTree.Tests
         {
             InvocationTestNode[] testNodes = new[]
             {
-                new InvocationTestNode(NodeExecutionStatus.Failure),
-                new InvocationTestNode(NodeExecutionStatus.Failure),
-                new InvocationTestNode(NodeExecutionStatus.Failure)
+                new InvocationTestNode(BehaviorNodeStatus.Failure),
+                new InvocationTestNode(BehaviorNodeStatus.Failure),
+                new InvocationTestNode(BehaviorNodeStatus.Failure)
             };
 
-            var sequence = new SelectorNode(testNodes);
-            sequence.Execute(long.MaxValue);
+            var selector = new SelectorNode(testNodes);
+            selector.Execute(long.MaxValue);
 
             Assert.IsTrue(testNodes.All(testNode => testNode.ExecutionCount == 1));
         }
