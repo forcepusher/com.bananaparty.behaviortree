@@ -1,4 +1,4 @@
-﻿namespace BehaviorTree
+﻿namespace BananaParty.BehaviorTree
 {
     /// <remarks>
     /// Default interface implementation for IBehaviorNode. Merely a class for code reusal.<br/>

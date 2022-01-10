@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BehaviorTree
+namespace BananaParty.BehaviorTree
 {
     /// <remarks>
     /// Code reusal for non-parallel composites.

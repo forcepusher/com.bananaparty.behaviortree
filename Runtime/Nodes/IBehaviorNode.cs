@@ -1,4 +1,4 @@
-namespace BehaviorTree
+namespace BananaParty.BehaviorTree
 {
     /// <remarks>
     /// Entire tree is reevaluated every tick from the root.<br/>

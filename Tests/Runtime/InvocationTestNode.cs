@@ -1,4 +1,4 @@
-﻿namespace BehaviorTree.Tests
+﻿namespace BananaParty.BehaviorTree.Tests
 {
     public class InvocationTestNode : BehaviorNode
     {

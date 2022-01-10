@@ -1,4 +1,4 @@
-﻿namespace BehaviorTree
+﻿namespace BananaParty.BehaviorTree
 {
     public class InverterNode : DecoratorNode
     {

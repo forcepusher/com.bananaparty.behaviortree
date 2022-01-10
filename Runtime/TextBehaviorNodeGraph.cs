@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BehaviorTree
+namespace BananaParty.BehaviorTree
 {
     public class TextBehaviorNodeGraph : ITreeGraph<IReadOnlyBehaviorNode>
     {

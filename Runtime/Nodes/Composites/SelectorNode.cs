@@ -1,4 +1,4 @@
-﻿namespace BehaviorTree
+﻿namespace BananaParty.BehaviorTree
 {
     public class SelectorNode : SequentialCompositeNode
     {
@@ -8,7 +8,7 @@
         {
             int runningChildIndex = RunningChildIndex;
 
-            for (int childIterator = (AlwaysReevaluate || runningChildIndex == -1) ? 0 : runningChildIndex;
+            for (int childIterator = AlwaysReevaluate || runningChildIndex == -1 ? 0 : runningChildIndex;
                 childIterator < ChildNodes.Length; childIterator += 1)
             {
                 BehaviorNodeStatus childNodeStatus = ChildNodes[childIterator].Execute(time);

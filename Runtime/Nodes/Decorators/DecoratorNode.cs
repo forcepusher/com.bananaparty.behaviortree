@@ -1,4 +1,4 @@
-﻿namespace BehaviorTree
+﻿namespace BananaParty.BehaviorTree
 {
     /// <remarks>
     /// Code reusal for decorators.

@@ -1,4 +1,4 @@
-﻿namespace BehaviorTree.Rollback
+﻿namespace BananaParty.BehaviorTree.Rollback
 {
     public class ConstantRollbackNode : ConstantNode, IRollbackBehaviorNode
     {
