@@ -1,12 +1,12 @@
 ﻿namespace BananaParty.BehaviorTree
 {
-    public class TimeoutNode : DecoratorNode
+    public class WaitNode : BehaviorNode
     {
         private readonly long _duration;
 
         private long _startTime = -1;
 
-        public TimeoutNode(IBehaviorNode childNode, long duration) : base(childNode)
+        public WaitNode(long duration)
         {
             _duration = duration;
         }
@@ -19,14 +19,9 @@
                 _startTime = time;
 
             if (time < _startTime + _duration)
-            {
-                return ChildNode.Execute(time);
-            }
+                return BehaviorNodeStatus.Running;
             else
-            {
-                ChildNode.Reset();
-                return BehaviorNodeStatus.Failure;
-            }
+                return BehaviorNodeStatus.Success;
         }
 
         public override void Reset()

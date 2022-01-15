@@ -6,11 +6,9 @@
 
         public override BehaviorNodeStatus OnExecute(long time)
         {
-            BehaviorNodeStatus childStatus = ChildNode.Execute(time);
-            if (childStatus != BehaviorNodeStatus.Success)
-                childStatus = BehaviorNodeStatus.Running;
+            ChildNode.Execute(time);
 
-            return childStatus;
+            return BehaviorNodeStatus.Running;
         }
     }
 }

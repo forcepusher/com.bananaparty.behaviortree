@@ -16,10 +16,33 @@ namespace BananaParty.BehaviorTree
             AlwaysReevaluate = alwaysReevaluate;
         }
 
+        protected abstract BehaviorNodeStatus ContinueStatus { get; }
+
         protected int RunningChildIndex => Array.FindIndex(ChildNodes,
             (childNode) => childNode.Status == BehaviorNodeStatus.Running);
 
-        public abstract override BehaviorNodeStatus OnExecute(long time);
+        public override BehaviorNodeStatus OnExecute(long time)
+        {
+            int runningChildIndex = RunningChildIndex;
+
+            for (int childIterator = AlwaysReevaluate || runningChildIndex == -1 ? 0 : runningChildIndex;
+                childIterator < ChildNodes.Length; childIterator += 1)
+            {
+                BehaviorNodeStatus childNodeStatus = ChildNodes[childIterator].Execute(time);
+
+                if (childNodeStatus != ContinueStatus)
+                {
+                    // Interrupt nodes in front on failed reevaluation.
+                    for (int childToResetIterator = childIterator + 1;
+                        childToResetIterator <= runningChildIndex; childToResetIterator += 1)
+                        ChildNodes[childToResetIterator].Reset();
+
+                    return childNodeStatus;
+                }
+            }
+
+            return ContinueStatus;
+        }
 
         public override void Reset()
         {
@@ -29,7 +52,7 @@ namespace BananaParty.BehaviorTree
                 child.Reset();
         }
 
-        public override string Name => base.Name + (AlwaysReevaluate ? '!' : string.Empty);
+        public override string Name => $"{base.Name}{(AlwaysReevaluate ? '!' : string.Empty)}";
 
         public override void WriteToGraph(ITreeGraph<IReadOnlyBehaviorNode> nodeGraph)
         {

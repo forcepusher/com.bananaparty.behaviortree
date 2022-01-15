@@ -6,6 +6,8 @@ namespace BananaParty.BehaviorTree
 {
     public class TextBehaviorNodeGraph : ITreeGraph<IReadOnlyBehaviorNode>
     {
+        private readonly bool _lineBreaks;
+
         private readonly Dictionary<BehaviorNodeStatus, string> _statusToString = new()
         {
             { BehaviorNodeStatus.Idle, "-" },
@@ -17,6 +19,11 @@ namespace BananaParty.BehaviorTree
         private readonly StringBuilder _stringBuilder = new();
         private string _indentation = string.Empty;
         private readonly Stack<int> _childrenToDraw = new();
+
+        public TextBehaviorNodeGraph(bool lineBreaks = false)
+        {
+            _lineBreaks = lineBreaks;
+        }
 
         private int CurrentChildrenToDrawCount
         {
@@ -37,9 +44,12 @@ namespace BananaParty.BehaviorTree
             }
             else
             {
-                // Adding empty line after the root node.
-                _stringBuilder.Append('\n');
-                _stringBuilder.Append('│');
+                if (_lineBreaks)
+                {
+                    // Adding empty line after the root node.
+                    _stringBuilder.Append('\n');
+                    _stringBuilder.Append('│');
+                }
             }
 
             _childrenToDraw.Push(childCount);
@@ -66,11 +76,14 @@ namespace BananaParty.BehaviorTree
         {
             _childrenToDraw.Pop();
 
-            // Adding empty line after last child node.
-            if (CurrentChildrenToDrawCount > 0)
+            if (_lineBreaks)
             {
-                _stringBuilder.Append('\n');
-                _stringBuilder.Append(_indentation);
+                // Adding empty line after last child node.
+                if (CurrentChildrenToDrawCount > 0)
+                {
+                    _stringBuilder.Append('\n');
+                    _stringBuilder.Append(_indentation);
+                }
             }
 
             _indentation = _indentation.Substring(0, Math.Max(_indentation.Length - 2, 0));
