@@ -2,23 +2,23 @@
 {
     public class TimeoutNode : DecoratorNode
     {
-        private readonly long _duration;
+        private readonly long _timeThreshold;
 
         private long _startTime = -1;
 
-        public TimeoutNode(IBehaviorNode childNode, long duration) : base(childNode)
+        public TimeoutNode(IBehaviorNode childNode, long timeThreshold) : base(childNode)
         {
-            _duration = duration;
+            _timeThreshold = timeThreshold;
         }
 
-        public override string Name => $"{base.Name} {_duration}";
+        public override string Name => $"{base.Name} {_timeThreshold}";
 
         public override BehaviorNodeStatus OnExecute(long time)
         {
             if (Status != BehaviorNodeStatus.Running)
                 _startTime = time;
 
-            if (time < _startTime + _duration)
+            if (time < _startTime + _timeThreshold)
             {
                 return ChildNode.Execute(time);
             }
