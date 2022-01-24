@@ -5,7 +5,7 @@
     /// </summary>
     public class ParallelSequenceNode : ParallelCompositeNode
     {
-        public ParallelSequenceNode(IBehaviorNode[] childNodes) : base(childNodes) { }
+        public ParallelSequenceNode(IBehaviorNode[] childNodes, string descriptionPrefix = "") : base(childNodes, descriptionPrefix) { }
 
         protected override BehaviorNodeStatus ContinueStatus => BehaviorNodeStatus.Success;
     }

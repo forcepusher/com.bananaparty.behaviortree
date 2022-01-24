@@ -10,10 +10,14 @@ namespace BananaParty.BehaviorTree
         protected readonly IBehaviorNode[] ChildNodes;
         protected readonly bool AlwaysReevaluate;
 
-        public SequentialCompositeNode(IBehaviorNode[] childNodes, bool alwaysReevaluate = false)
+        private readonly string _descriptionPrefix;
+
+        public SequentialCompositeNode(IBehaviorNode[] childNodes, bool alwaysReevaluate, string descriptionPrefix)
         {
             ChildNodes = childNodes;
             AlwaysReevaluate = alwaysReevaluate;
+
+            _descriptionPrefix = descriptionPrefix;
         }
 
         protected abstract BehaviorNodeStatus ContinueStatus { get; }
@@ -52,7 +56,7 @@ namespace BananaParty.BehaviorTree
                 child.Reset();
         }
 
-        public override string Name => $"{base.Name}{(AlwaysReevaluate ? '!' : string.Empty)}";
+        public override string Name => $"{_descriptionPrefix}{base.Name}{(AlwaysReevaluate ? '!' : string.Empty)}";
 
         public override void WriteToGraph(ITreeGraph<IReadOnlyBehaviorNode> nodeGraph)
         {

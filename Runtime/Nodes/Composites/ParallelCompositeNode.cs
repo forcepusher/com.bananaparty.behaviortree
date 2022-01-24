@@ -7,9 +7,13 @@
     {
         protected readonly IBehaviorNode[] ChildNodes;
 
-        public ParallelCompositeNode(IBehaviorNode[] childNodes)
+        private readonly string _descriptionPrefix;
+
+        public ParallelCompositeNode(IBehaviorNode[] childNodes, string descriptionPrefix)
         {
             ChildNodes = childNodes;
+
+            _descriptionPrefix = descriptionPrefix;
         }
 
         protected abstract BehaviorNodeStatus ContinueStatus { get; }
@@ -50,6 +54,8 @@
             foreach (IBehaviorNode child in ChildNodes)
                 child.Reset();
         }
+
+        public override string Name => $"{_descriptionPrefix}{base.Name}";
 
         public override void WriteToGraph(ITreeGraph<IReadOnlyBehaviorNode> nodeGraph)
         {

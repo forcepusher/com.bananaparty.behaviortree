@@ -4,7 +4,7 @@
     {
         private readonly IRollbackBehaviorNode[] _childNodes;
 
-        public SequenceRollbackNode(IRollbackBehaviorNode[] childNodes, bool alwaysReset = false) : base(childNodes, alwaysReset)
+        public SequenceRollbackNode(IRollbackBehaviorNode[] childNodes, bool alwaysReset = false, string descriptionPrefix = "") : base(childNodes, alwaysReset, descriptionPrefix)
         {
             _childNodes = childNodes;
         }
