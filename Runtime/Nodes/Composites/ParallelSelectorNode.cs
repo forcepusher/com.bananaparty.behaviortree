@@ -5,7 +5,7 @@
     /// </summary>
     public class ParallelSelectorNode : ParallelCompositeNode
     {
-        public ParallelSelectorNode(IBehaviorNode[] childNodes) : base(childNodes) { }
+        public ParallelSelectorNode(IBehaviorNode[] childNodes, string descriptionPrefix = "") : base(childNodes, descriptionPrefix) { }
 
         protected override BehaviorNodeStatus ContinueStatus => BehaviorNodeStatus.Failure;
     }

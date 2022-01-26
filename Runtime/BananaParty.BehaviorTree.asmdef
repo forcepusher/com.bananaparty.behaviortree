@@ -1,9 +1,7 @@
 {
     "name": "BananaParty.BehaviorTree",
     "rootNamespace": "",
-    "references": [
-        "GUID:db0819fba7060d6408b817b7bb3a1f66"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
@@ -12,5 +10,5 @@
     "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
-    "noEngineReferences": false
+    "noEngineReferences": true
 }
