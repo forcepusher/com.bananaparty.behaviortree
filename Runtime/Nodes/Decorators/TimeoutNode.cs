@@ -15,7 +15,7 @@
 
         public override BehaviorNodeStatus OnExecute(long time)
         {
-            if (Status != BehaviorNodeStatus.Running)
+            if (Status == BehaviorNodeStatus.Idle)
                 _startTime = time;
 
             if (time < _startTime + _timeThreshold)
