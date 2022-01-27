@@ -7,5 +7,6 @@
         public void Restore(TSnapshot snapshot);
     }
 
-    public interface IRollbackBehaviorNode : IRollbackBehaviorNode<IBehaviorNodeSnapshot> { }
+    // Makes things look like magic, we don't want that. Reduces the type length though.
+    //public interface IRollbackBehaviorNode : IRollbackBehaviorNode<IBehaviorNodeSnapshot> { }
 }
