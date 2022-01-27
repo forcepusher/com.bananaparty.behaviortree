@@ -2,9 +2,9 @@
 {
     public class SequenceRollbackNode : SequenceNode, IRollbackBehaviorNode<SequenceNodeSnapshot>
     {
-        private readonly IRollbackBehaviorNode[] _childNodes;
+        private readonly IRollbackBehaviorNode<IBehaviorNodeSnapshot>[] _childNodes;
 
-        public SequenceRollbackNode(IRollbackBehaviorNode[] childNodes, bool alwaysReset = false, string descriptionPrefix = "") : base(childNodes, alwaysReset, descriptionPrefix)
+        public SequenceRollbackNode(IRollbackBehaviorNode<IBehaviorNodeSnapshot>[] childNodes, bool alwaysReset = false, string descriptionPrefix = "") : base(childNodes, alwaysReset, descriptionPrefix)
         {
             _childNodes = childNodes;
         }

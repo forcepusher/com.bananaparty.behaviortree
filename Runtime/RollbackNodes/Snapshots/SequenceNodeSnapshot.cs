@@ -1,9 +1,10 @@
 ﻿namespace BananaParty.BehaviorTree.Rollback
 {
-    public readonly struct SequenceNodeSnapshot : IBehaviorNodeSnapshot
+    public class SequenceNodeSnapshot : IBehaviorNodeSnapshot
     {
-        public readonly BehaviorNodeStatus Status;
         public readonly IBehaviorNodeSnapshot[] ChildSnapshots;
+
+        public BehaviorNodeStatus Status { get; }
 
         public SequenceNodeSnapshot(BehaviorNodeStatus status, IBehaviorNodeSnapshot[] childSnapshots)
         {
