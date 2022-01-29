@@ -1,17 +1,12 @@
-﻿namespace BananaParty.BehaviorTree.Rollback
+﻿namespace BananaParty.BehaviorTree
 {
-    public class ConstantRollbackNode : ConstantNode, IRollbackBehaviorNode<StatelessNodeSnapshot>
+    public class ConstantRollbackNode : ConstantNode, IRollbackNode
     {
         public ConstantRollbackNode(BehaviorNodeStatus statusToReturn) : base(statusToReturn) { }
 
-        public StatelessNodeSnapshot Save()
+        public void SaveState(ISnapshotTree snapshotTree)
         {
-            return new StatelessNodeSnapshot(Status);
-        }
-
-        public void Restore(StatelessNodeSnapshot snapshot)
-        {
-            Status = snapshot.Status;
+            snapshotTree.Write(new ConstantNodeSnapshot(this, Status));
         }
     }
 }

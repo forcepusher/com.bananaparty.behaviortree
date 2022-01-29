@@ -6,7 +6,7 @@
     /// </remarks>
     public abstract class BehaviorNode : IBehaviorNode
     {
-        public BehaviorNodeStatus Status { get; protected set; }
+        public BehaviorNodeStatus Status { get; set; }
 
         public bool Finished => Status == BehaviorNodeStatus.Success || Status == BehaviorNodeStatus.Failure;
 

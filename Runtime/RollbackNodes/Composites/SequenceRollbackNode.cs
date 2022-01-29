@@ -1,29 +1,20 @@
-﻿namespace BananaParty.BehaviorTree.Rollback
+﻿namespace BananaParty.BehaviorTree
 {
-    public class SequenceRollbackNode : SequenceNode, IRollbackBehaviorNode<SequenceNodeSnapshot>
+    public class SequenceRollbackNode : SequenceNode, IRollbackNode
     {
-        private readonly IRollbackBehaviorNode<IBehaviorNodeSnapshot>[] _childNodes;
+        private readonly IRollbackNode[] _childNodes;
 
-        public SequenceRollbackNode(IRollbackBehaviorNode<IBehaviorNodeSnapshot>[] childNodes, bool alwaysReset = false, string descriptionPrefix = "") : base(childNodes, alwaysReset, descriptionPrefix)
+        public SequenceRollbackNode(IRollbackNode[] childNodes, bool alwaysReevaluate = false, string descriptionPrefix = "") : base(childNodes, alwaysReevaluate, descriptionPrefix)
         {
             _childNodes = childNodes;
         }
 
-        public SequenceNodeSnapshot Save()
+        public void SaveState(ISnapshotTree snapshotTree)
         {
-            var snapshots = new IBehaviorNodeSnapshot[_childNodes.Length];
-            for (int childIterator = 0; childIterator < _childNodes.Length; childIterator += 1)
-                snapshots[childIterator] = _childNodes[childIterator].Save();
+            snapshotTree.Write(new SequenceNodeSnapshot(this, Status));
 
-            return new SequenceNodeSnapshot(Status, snapshots);
-        }
-
-        public void Restore(SequenceNodeSnapshot snapshot)
-        {
-            Status = snapshot.Status;
-
-            for (int childIterator = 0; childIterator < _childNodes.Length; childIterator += 1)
-                _childNodes[childIterator].Restore(snapshot.ChildSnapshots[childIterator]);
+            foreach (IRollbackNode child in _childNodes)
+                child.SaveState(snapshotTree);
         }
     }
 }
