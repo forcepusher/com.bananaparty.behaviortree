@@ -13,12 +13,17 @@ namespace BananaParty.BehaviorTree
         /// <remarks>
         /// Sets <see cref="IReadOnlyBehaviorNode.Status"/> to the value returned by this method.
         /// </remarks>
-        public BehaviorNodeStatus Execute(long time);
+        BehaviorNodeStatus Execute(long time);
 
         /// <summary>
         /// Interrupts execution and resets state of the node and its children.<br/>
         /// <see cref="IReadOnlyBehaviorNode.Status"/> is set back to <see cref="BehaviorNodeStatus.Idle"/>.
         /// </summary>
-        public void Reset();
+        void Reset();
+
+        /// <summary>
+        /// Current execution state.
+        /// </summary>
+        new BehaviorNodeStatus Status { get; set; }
     }
 }

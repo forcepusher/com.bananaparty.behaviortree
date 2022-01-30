@@ -8,7 +8,15 @@
     {
         public BehaviorNodeStatus Status { get; set; }
 
+        /// <summary>
+        /// Convenience property to avoid writing the whole status check thing.
+        /// </summary>
         public bool Finished => Status == BehaviorNodeStatus.Success || Status == BehaviorNodeStatus.Failure;
+
+        /// <summary>
+        /// Convenience property to make things easier to understand... sometimes.
+        /// </summary>
+        public bool Started => Status != BehaviorNodeStatus.Idle;
 
         public BehaviorNodeStatus Execute(long time)
         {

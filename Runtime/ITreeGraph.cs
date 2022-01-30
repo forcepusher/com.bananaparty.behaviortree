@@ -2,10 +2,10 @@
 {
     public interface ITreeGraph<TVertex>
     {
-        public void StartChildGroup(int childCount);
+        void StartChildGroup(int childCount);
 
-        public void Write(TVertex vertex);
+        void Write(TVertex vertex);
 
-        public void EndChildGroup();
+        void EndChildGroup();
     }
 }

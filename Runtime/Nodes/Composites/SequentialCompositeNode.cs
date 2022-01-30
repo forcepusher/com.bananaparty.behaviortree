@@ -7,14 +7,14 @@ namespace BananaParty.BehaviorTree
     /// </remarks>
     public abstract class SequentialCompositeNode : BehaviorNode
     {
-        public readonly IBehaviorNode[] ChildNodes;
+        private readonly IBehaviorNode[] _childNodes;
         private readonly bool _alwaysReevaluate;
 
         private readonly string _descriptionPrefix;
 
         public SequentialCompositeNode(IBehaviorNode[] childNodes, bool alwaysReevaluate, string descriptionPrefix)
         {
-            ChildNodes = childNodes;
+            _childNodes = childNodes;
             _alwaysReevaluate = alwaysReevaluate;
 
             _descriptionPrefix = descriptionPrefix;
@@ -22,7 +22,7 @@ namespace BananaParty.BehaviorTree
 
         protected abstract BehaviorNodeStatus ContinueStatus { get; }
 
-        protected int RunningChildIndex => Array.FindIndex(ChildNodes,
+        protected int RunningChildIndex => Array.FindIndex(_childNodes,
             (childNode) => childNode.Status == BehaviorNodeStatus.Running);
 
         public override BehaviorNodeStatus OnExecute(long time)
@@ -30,16 +30,16 @@ namespace BananaParty.BehaviorTree
             int runningChildIndex = RunningChildIndex;
 
             for (int childIterator = _alwaysReevaluate || runningChildIndex == -1 ? 0 : runningChildIndex;
-                childIterator < ChildNodes.Length; childIterator += 1)
+                childIterator < _childNodes.Length; childIterator += 1)
             {
-                BehaviorNodeStatus childNodeStatus = ChildNodes[childIterator].Execute(time);
+                BehaviorNodeStatus childNodeStatus = _childNodes[childIterator].Execute(time);
 
                 if (childNodeStatus != ContinueStatus)
                 {
                     // Interrupt nodes in front on failed reevaluation.
                     for (int childToResetIterator = childIterator + 1;
                         childToResetIterator <= runningChildIndex; childToResetIterator += 1)
-                        ChildNodes[childToResetIterator].Reset();
+                        _childNodes[childToResetIterator].Reset();
 
                     return childNodeStatus;
                 }
@@ -52,7 +52,7 @@ namespace BananaParty.BehaviorTree
         {
             base.Reset();
 
-            foreach (IBehaviorNode child in ChildNodes)
+            foreach (IBehaviorNode child in _childNodes)
                 child.Reset();
         }
 
@@ -62,8 +62,8 @@ namespace BananaParty.BehaviorTree
         {
             base.WriteToGraph(nodeGraph);
 
-            nodeGraph.StartChildGroup(ChildNodes.Length);
-            foreach (IBehaviorNode childNode in ChildNodes)
+            nodeGraph.StartChildGroup(_childNodes.Length);
+            foreach (IBehaviorNode childNode in _childNodes)
                 childNode.WriteToGraph(nodeGraph);
             nodeGraph.EndChildGroup();
         }

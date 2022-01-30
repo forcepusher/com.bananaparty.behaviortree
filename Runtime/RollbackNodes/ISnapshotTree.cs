@@ -2,6 +2,6 @@
 {
     public interface ISnapshotTree : INodeSnapshot
     {
-        public void Write(INodeSnapshot nodeSnapshot);
+        void Write(INodeSnapshot nodeSnapshot);
     }
 }

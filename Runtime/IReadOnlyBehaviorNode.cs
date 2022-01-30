@@ -9,16 +9,16 @@
         /// <summary>
         /// Human-readable node name.
         /// </summary>
-        public string Name { get; }
+        string Name { get; }
 
         /// <summary>
         /// Current execution state.
         /// </summary>
-        public BehaviorNodeStatus Status { get; }
+        BehaviorNodeStatus Status { get; }
 
         /// <summary>
         /// Outputs the node and all of its children to a human-readable graph.
         /// </summary>
-        public void WriteToGraph(ITreeGraph<IReadOnlyBehaviorNode> nodeGraph);
+        void WriteToGraph(ITreeGraph<IReadOnlyBehaviorNode> nodeGraph);
     }
 }

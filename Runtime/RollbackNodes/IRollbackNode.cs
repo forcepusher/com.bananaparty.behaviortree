@@ -2,6 +2,6 @@
 {
     public interface IRollbackNode : IBehaviorNode
     {
-        void SaveState(ISnapshotTree snapshotTree);
+        void WriteState(ISnapshotTree snapshotTree);
     }
 }

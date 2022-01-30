@@ -9,12 +9,12 @@
             _childNodes = childNodes;
         }
 
-        public void SaveState(ISnapshotTree snapshotTree)
+        public void WriteState(ISnapshotTree snapshotTree)
         {
-            snapshotTree.Write(new SequenceNodeSnapshot(this, Status));
+            snapshotTree.Write(new NodeSnapshot(this, Status));
 
             foreach (IRollbackNode child in _childNodes)
-                child.SaveState(snapshotTree);
+                child.WriteState(snapshotTree);
         }
     }
 }

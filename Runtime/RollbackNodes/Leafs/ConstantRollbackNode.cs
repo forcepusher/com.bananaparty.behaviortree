@@ -4,9 +4,9 @@
     {
         public ConstantRollbackNode(BehaviorNodeStatus statusToReturn) : base(statusToReturn) { }
 
-        public void SaveState(ISnapshotTree snapshotTree)
+        public void WriteState(ISnapshotTree snapshotTree)
         {
-            snapshotTree.Write(new ConstantNodeSnapshot(this, Status));
+            snapshotTree.Write(new NodeSnapshot(this, Status));
         }
     }
 }
