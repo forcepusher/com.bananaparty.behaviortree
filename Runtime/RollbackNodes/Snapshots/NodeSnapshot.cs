@@ -5,18 +5,18 @@
     /// </summary>
     public class NodeSnapshot : INodeSnapshot
     {
-        private readonly IBehaviorNode _behaviorNode;
+        private readonly IRollbackNode _rollbackNode;
         private readonly BehaviorNodeStatus _status;
 
-        public NodeSnapshot(IBehaviorNode behaviorNode, BehaviorNodeStatus status)
+        public NodeSnapshot(IRollbackNode rollbackNode, BehaviorNodeStatus status)
         {
-            _behaviorNode = behaviorNode;
+            _rollbackNode = rollbackNode;
             _status = status;
         }
 
         public void ApplyState()
         {
-            _behaviorNode.Status = _status;
+            _rollbackNode.Status = _status;
         }
     }
 }
