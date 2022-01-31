@@ -13,5 +13,7 @@
         {
             return _statusToReturn;
         }
+
+        public override string Name => $"{base.Name} {_statusToReturn}";
     }
 }

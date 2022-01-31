@@ -20,10 +20,5 @@ namespace BananaParty.BehaviorTree
         /// <see cref="IReadOnlyBehaviorNode.Status"/> is set back to <see cref="BehaviorNodeStatus.Idle"/>.
         /// </summary>
         void Reset();
-
-        /// <summary>
-        /// Current execution state.
-        /// </summary>
-        new BehaviorNodeStatus Status { get; set; }
     }
 }
