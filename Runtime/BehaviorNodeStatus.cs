@@ -3,8 +3,8 @@
     public enum BehaviorNodeStatus
     {
         Idle,
+        Running,
         Failure,
-        Success,
-        Running
+        Success
     }
 }
