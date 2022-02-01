@@ -11,7 +11,7 @@
         /// <summary>
         /// Convenience property to avoid writing the whole status check thing.
         /// </summary>
-        public bool Finished => Status == BehaviorNodeStatus.Success || Status == BehaviorNodeStatus.Failure;
+        public bool Finished => Status > BehaviorNodeStatus.Running;
 
         /// <summary>
         /// Convenience property to make things easier to understand... sometimes.
