@@ -6,7 +6,7 @@
         {
             NextExecutionStatus = startExecutionStatus;
         }
-        
+
         public BehaviorNodeStatus NextExecutionStatus { get; set; }
 
         public override BehaviorNodeStatus OnExecute(long time)
