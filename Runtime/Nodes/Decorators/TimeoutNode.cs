@@ -18,15 +18,21 @@
             if (Status == BehaviorNodeStatus.Idle)
                 _startTime = time;
 
+            if (ChildNode.Status == BehaviorNodeStatus.Failure || ChildNode.Status == BehaviorNodeStatus.Success)
+            {
+                BehaviorNodeStatus childStatus = ChildNode.Execute(time);
+
+                if (childStatus == BehaviorNodeStatus.Running)
+                    _startTime = time;
+
+                return childStatus;
+            }
+
             if (time < _startTime + _timeThreshold)
-            {
                 return ChildNode.Execute(time);
-            }
-            else
-            {
-                ChildNode.Reset();
-                return BehaviorNodeStatus.Failure;
-            }
+
+            ChildNode.Reset();
+            return BehaviorNodeStatus.Failure;
         }
 
         public override void Reset()
