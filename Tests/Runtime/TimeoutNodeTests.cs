@@ -12,7 +12,7 @@ namespace BananaParty.BehaviorTree.Tests
         [TestCase(BehaviorNodeStatus.Running, BehaviorNodeStatus.Failure)]
         public void ShouldReturnExpectedResultOnTimeout(BehaviorNodeStatus childStatus, BehaviorNodeStatus finalStatus)
         {
-            TimeoutNode timeoutNode = new TimeoutNode
+            var timeoutNode = new TimeoutNode
             (
                 new ConstantNode(childStatus),
                 TimeoutThreshold
@@ -30,7 +30,7 @@ namespace BananaParty.BehaviorTree.Tests
         public void ShouldRestartWhenChildStartsRunningAfterFinishing(BehaviorNodeStatus finishedStatus)
         {
             var statusChangingNode = new MutableConstantNode(finishedStatus);
-            TimeoutNode timeoutNode = new TimeoutNode
+            var timeoutNode = new TimeoutNode
             (
                 statusChangingNode,
                 TimeoutThreshold
@@ -52,7 +52,7 @@ namespace BananaParty.BehaviorTree.Tests
         public void ShouldFailAndNotRestartOnTimeout(BehaviorNodeStatus anyStatus)
         {
             var statusChangingNode = new MutableConstantNode(BehaviorNodeStatus.Running);
-            TimeoutNode timeoutNode = new TimeoutNode
+            var timeoutNode = new TimeoutNode
             (
                 statusChangingNode,
                 TimeoutThreshold
