@@ -1,6 +1,6 @@
 # com.bananaparty.behaviortree  
   
-Unity package. Behavior Tree featuring support for deterministic simulation and prediction-rollback netcode.  
+Unity package. Fully cross-platform Behavior Tree featuring support for deterministic simulation and prediction-rollback netcode.  
 Does not reference Unity Engine, so it could be used in a regular C# project.  
   
 Make sure you have standalone [Git](https://git-scm.com/downloads) installed first.  
