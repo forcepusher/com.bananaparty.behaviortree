@@ -2,11 +2,19 @@
 {
     public class ConstantRollbackNode : ConstantNode, IRollbackNode
     {
-        public ConstantRollbackNode(BehaviorNodeStatus statusToReturn) : base(statusToReturn) { }
-
-        public void WriteState(ISnapshotTree snapshotTree)
+        private readonly BehaviorNodeStatus _statusToReturn;
+        
+        public ConstantRollbackNode(BehaviorNodeStatus statusToReturn) : base(statusToReturn)
         {
-            snapshotTree.Write(new NodeSnapshot(this, Status));
+            _statusToReturn = statusToReturn;
+        }
+
+        public IRollbackNode Copy()
+        {
+            var nodeCopy = new ConstantRollbackNode(_statusToReturn);
+            nodeCopy.Status = Status;
+            
+            return nodeCopy;
         }
     }
 }
