@@ -2,9 +2,11 @@
 {
     public interface IRollbackNode : IBehaviorNode
     {
+        void WriteState(ISnapshotTree snapshotTree);
+
         /// <summary>
-        /// Create copy of this node for rollback.
+        /// Current execution state. Setter is enabled for implementing rollback.
         /// </summary>
-        IRollbackNode Copy();
+        new BehaviorNodeStatus Status { get; set; }
     }
 }
