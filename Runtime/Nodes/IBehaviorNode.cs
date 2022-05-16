@@ -1,9 +1,5 @@
 namespace BananaParty.BehaviorTree
 {
-    /// <remarks>
-    /// Entire tree is reevaluated every tick from the root.<br/>
-    /// However only relevant nodes are invoked, as they remember their execution state.
-    /// </remarks>
     public interface IBehaviorNode : IReadOnlyBehaviorNode
     {
         /// <summary>
@@ -11,6 +7,8 @@ namespace BananaParty.BehaviorTree
         /// </summary>
         /// <param name="time">Frame/tick number or execution time (preferably milliseconds).</param>
         /// <remarks>
+        /// Entire tree is reevaluated every tick from the root.<br/>
+        /// However only relevant nodes are invoked, as they remember their execution state.<br/>
         /// Sets <see cref="IReadOnlyBehaviorNode.Status"/> to the value returned by this method.
         /// </remarks>
         BehaviorNodeStatus Execute(long time);

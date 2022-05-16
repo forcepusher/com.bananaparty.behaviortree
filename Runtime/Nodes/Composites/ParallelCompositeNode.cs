@@ -16,7 +16,9 @@
             _descriptionPrefix = descriptionPrefix;
         }
 
-        protected abstract BehaviorNodeStatus ContinueStatus { get; }
+        protected abstract BehaviorNodeStatus CompletionStatus { get; }
+
+        protected abstract bool ShouldContinueOnStatus(BehaviorNodeStatus status);
 
         public override BehaviorNodeStatus OnExecute(long time)
         {
@@ -26,7 +28,7 @@
                 BehaviorNodeStatus childNodeStatus = childNode.Execute(time);
                 if (childNodeStatus != BehaviorNodeStatus.Running)
                 {
-                    if (childNodeStatus != ContinueStatus)
+                    if (!ShouldContinueOnStatus(childNodeStatus))
                     {
                         foreach (IBehaviorNode childNodeToReset in ChildNodes)
                             if (childNodeToReset != childNode)
@@ -42,7 +44,7 @@
             }
 
             if (allNodesCompleted)
-                return ContinueStatus;
+                return CompletionStatus;
 
             return BehaviorNodeStatus.Running;
         }
