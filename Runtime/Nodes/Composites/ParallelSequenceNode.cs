@@ -7,6 +7,8 @@
     {
         public ParallelSequenceNode(IBehaviorNode[] childNodes, string descriptionPrefix = "") : base(childNodes, descriptionPrefix) { }
 
-        protected override BehaviorNodeStatus ContinueStatus => BehaviorNodeStatus.Success;
+        protected override BehaviorNodeStatus CompletionStatus => BehaviorNodeStatus.Success;
+
+        protected override bool ShouldContinueOnStatus(BehaviorNodeStatus status) => status == BehaviorNodeStatus.Success;
     }
 }

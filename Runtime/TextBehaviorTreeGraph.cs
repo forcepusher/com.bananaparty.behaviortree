@@ -4,8 +4,10 @@ using System.Text;
 
 namespace BananaParty.BehaviorTree
 {
-    public class TextBehaviorNodeGraph : ITreeGraph<IReadOnlyBehaviorNode>
+    public class TextBehaviorTreeGraph : ITreeGraph<IReadOnlyBehaviorNode>
     {
+        public string Name { get; }
+
         private readonly bool _lineBreaks;
 
         private readonly Dictionary<BehaviorNodeStatus, string> _statusToString = new()
@@ -20,8 +22,9 @@ namespace BananaParty.BehaviorTree
         private string _indentation = string.Empty;
         private readonly Stack<int> _childrenToDraw = new();
 
-        public TextBehaviorNodeGraph(bool lineBreaks = false)
+        public TextBehaviorTreeGraph(string name, bool lineBreaks = false)
         {
+            Name = name;
             _lineBreaks = lineBreaks;
         }
 
@@ -91,7 +94,7 @@ namespace BananaParty.BehaviorTree
 
         public override string ToString()
         {
-            return _stringBuilder.ToString();
+            return $"{Name}\n{_stringBuilder}";
         }
     }
 }
