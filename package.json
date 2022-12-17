@@ -1,8 +1,12 @@
 {
   "name": "com.bananaparty.behaviortree",
-  "version": "2.0.0",
-  "type": "library",
   "displayName": "Behavior Tree",
+  "author": { "name": "Bananaparty", "url": "https://github.com/forcepusher" },
+  "version": "3.0.0",
   "unity": "2021.2",
-  "description": "Behavior tree implementation."
+  "description": "Behavior tree implementation.",
+  "keywords": [ "Behavior tree", "Nodes" ],
+  "license": "MIT",
+  "category": "Library",
+  "dependencies": {}
 }
