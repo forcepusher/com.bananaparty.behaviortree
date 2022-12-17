@@ -5,7 +5,7 @@ namespace BananaParty.BehaviorTree
     public class Timer : ITimer
     {
         private readonly int _seconds;
-        private DateTime _startTime;
+        private DateTime _endTime;
         private bool _isStarted = false;
 
         public Timer(int seconds)
@@ -16,20 +16,18 @@ namespace BananaParty.BehaviorTree
         public void StartIfNot()
         {
             if (_isStarted) return;
-            _startTime = DateTime.Now;
+            _endTime = DateTime.Now.AddSeconds(_seconds);
             _isStarted = true;
         }
 
         public bool IsEnded()
         {
-            TimeSpan elapsed = DateTime.Now - _startTime;
-            return elapsed.TotalSeconds >= _seconds;
+            return DateTime.Now > _endTime;
         }
 
         public void Reset()
         {
             _isStarted = false;
         }
-
     }
 }
