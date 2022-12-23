@@ -5,7 +5,6 @@
         protected override bool Inverted => _inverted;
 
         private readonly bool _inverted;
-        private readonly IBehaviorNode _handledNode;
 
         public ParallelChainNode(IBehaviorNode childNode, bool inverted) : base(childNode)
         {

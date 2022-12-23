@@ -18,7 +18,7 @@
                 State = _state,
                 Type = Type,
                 ChildNode = GetChildVisualizationData(),
-                NextNode = _nextNode.GetVisualizationData(),
+                NextNode = _nextNode?.GetVisualizationData(),
             };
         }
 
