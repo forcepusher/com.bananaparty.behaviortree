@@ -9,7 +9,7 @@
 
         public BehaviorNodeStatus NextExecutionStatus { get; set; }
 
-        public override BehaviorNodeStatus OnExecute(long time)
+        protected override BehaviorNodeStatus OnExecute()
         {
             return NextExecutionStatus;
         }

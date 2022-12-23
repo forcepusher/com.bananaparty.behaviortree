@@ -16,7 +16,7 @@ namespace BananaParty.BehaviorTree.Tests
             };
 
             var sequence = new SequenceNode(testNodes);
-            sequence.Execute(long.MaxValue);
+            sequence.Execute();
 
             Assert.IsTrue(testNodes.All(testNode => testNode.ExecutionCount == 1));
         }
