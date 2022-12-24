@@ -1,6 +1,6 @@
 ﻿namespace BananaParty.BehaviorTree
 {
-    public interface INodeVisualizer
+    public interface IBehaviorTreeVisualizer
     {
         public void Visualize(BehaviorNodeVisualizationData nodeData);
     }

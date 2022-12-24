@@ -3,9 +3,9 @@
     public abstract class BehaviorTree : IBehaviorTree
     {
         private IBehaviorNode _node;
-        private INodeVisualizer _visualizer;
+        private IBehaviorTreeVisualizer _visualizer;
 
-        public BehaviorTree(IBehaviorNode node, INodeVisualizer visualizer)
+        public BehaviorTree(IBehaviorNode node, IBehaviorTreeVisualizer visualizer)
         {
             _node = node;
             _visualizer = visualizer;

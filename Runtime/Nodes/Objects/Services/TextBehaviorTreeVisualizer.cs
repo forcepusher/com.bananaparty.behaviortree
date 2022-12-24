@@ -2,16 +2,20 @@
 
 namespace BananaParty.BehaviorTree
 {
-    public class TextBehaviorTreeVisualizer : INodeVisualizer
+    public class TextBehaviorTreeVisualizer : IBehaviorTreeVisualizer
     {
         private ITextDisplay _display;
+        private INodeDataTextVisualizer _nodeVisualizer;
         private string _currentBranch = string.Empty;
         private List<string> _branches = new List<string>();
         private bool _treeIsNotGenerated = true;
+        private bool _dontDisplayChains;
 
-        public TextBehaviorTreeVisualizer(ITextDisplay display)
+        public TextBehaviorTreeVisualizer(ITextDisplay display, INodeDataTextVisualizer nodeVisualizer, bool dontDisplayChains = true)
         {
             _display = display;
+            _nodeVisualizer = nodeVisualizer;
+            _dontDisplayChains = dontDisplayChains;
         }
 
         public void Visualize(BehaviorNodeVisualizationData nodeData)
@@ -21,16 +25,42 @@ namespace BananaParty.BehaviorTree
                 GenerateTree(nodeData);
                 _treeIsNotGenerated = false;
             }
-            string result = DisplayRootNode();
+            string result = _nodeVisualizer.DisplayRoot() + '\n';
             result += DisplayNodes(nodeData, _branches.GetEnumerator());
             _display.Display(result);
         }
 
         private void GenerateTree(BehaviorNodeVisualizationData node)
         {
+            if (!CanDisplay(node))
+            {
+                if (node.NextNode != null)
+                {
+                    _branches.Add(_currentBranch + DisplayMiddleBranch().ToString());
+                    if (node.ChildNode.ChildNode != null)
+                    {
+                        AddLevel(DisplayPassBranch());
+                        GenerateTree(node.ChildNode.ChildNode);
+                        RemoveLevel();
+                    }
+                    GenerateTree(node.NextNode);
+                }
+                else
+                {
+                    _branches.Add(_currentBranch + DisplayLastBranch().ToString());
+                    if (node.ChildNode.ChildNode != null)
+                    {
+                        AddLevel(DisplayEmptyBranch());
+                        GenerateTree(node.ChildNode.ChildNode);
+                        RemoveLevel();
+                    }
+                }
+                return;
+            }
+
             if (node.NextNode != null)
             {
-                _branches.Add(DisplayMiddleBranch().ToString());
+                _branches.Add(_currentBranch + DisplayMiddleBranch().ToString());
                 if (node.ChildNode != null)
                 {
                     AddLevel(DisplayPassBranch());
@@ -41,7 +71,7 @@ namespace BananaParty.BehaviorTree
             }
             else
             {
-                _branches.Add(DisplayLastBranch().ToString());
+                _branches.Add(_currentBranch + DisplayLastBranch().ToString());
                 if (node.ChildNode != null)
                 {
                     AddLevel(DisplayEmptyBranch());
@@ -53,41 +83,17 @@ namespace BananaParty.BehaviorTree
 
         private string DisplayNodes(BehaviorNodeVisualizationData node, IEnumerator<string> tree)
         {
-            tree.MoveNext();
-            var currentBranch = tree.Current;
-            string result = $"{currentBranch}<{DisplayType(node.Type)}" +
-                $"-{DisplayStatus(node.State)}> {node.Name}\n";
+            string result = string.Empty;
+
+            if (CanDisplay(node))
+            {
+                tree.MoveNext();
+                var currentBranch = tree.Current;
+                result = currentBranch + _nodeVisualizer.Display(node) + '\n';
+            }
             if (node.ChildNode != null) result += DisplayNodes(node.ChildNode, tree);
             if (node.NextNode != null) result += DisplayNodes(node.NextNode, tree);
             return result;
-        }
-
-        private string DisplayType(BehaviorNodeType type)
-        {
-            return type switch
-            {
-                BehaviorNodeType.Sequence => "➩",
-                BehaviorNodeType.Selector => "?",
-                BehaviorNodeType.ParallelSequence => "&➩",
-                BehaviorNodeType.ParallelSelector => "&?",
-                _ => string.Empty,
-            };
-        }
-
-        private string DisplayStatus(BehaviorNodeStatus status)
-        {
-            return status switch
-            {
-                BehaviorNodeStatus.Success => "✅",
-                BehaviorNodeStatus.Failure => "❎",
-                BehaviorNodeStatus.Running => "🔄",
-                _ => "⏸",
-            };
-        }
-
-        private string DisplayRootNode()
-        {
-            return "<Ø> Root Node\n";
         }
 
         private char DisplayMiddleBranch() => '├';
@@ -105,6 +111,11 @@ namespace BananaParty.BehaviorTree
         {
             if (_currentBranch.Length <= 0) return;
             _currentBranch = _currentBranch.Remove(_currentBranch.Length - 1);
+        }
+
+        private bool CanDisplay(BehaviorNodeVisualizationData node)
+        {
+            return !(_dontDisplayChains && node.Type == BehaviorNodeType.Chain);
         }
     }
 }
