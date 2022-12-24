@@ -1,6 +1,4 @@
-﻿using Codice.Client.Common.TreeGrouper;
-
-namespace BananaParty.BehaviorTree
+﻿namespace BananaParty.BehaviorTree
 {
     public class TextColoredEmojiNodeDataVisualizer : INodeDataTextVisualizer
     {

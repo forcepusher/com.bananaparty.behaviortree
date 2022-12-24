@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BananaParty.BehaviorTree
+﻿namespace BananaParty.BehaviorTree
 {
     public abstract class RollbackChainHandlerNode : BehaviorNode, IRollbackNode
     {

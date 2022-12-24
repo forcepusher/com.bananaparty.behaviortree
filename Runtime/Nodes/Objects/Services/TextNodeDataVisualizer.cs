@@ -1,7 +1,4 @@
-﻿using Codice.Client.Commands;
-using System.Linq;
-
-namespace BananaParty.BehaviorTree
+﻿namespace BananaParty.BehaviorTree
 {
     public class TextNodeDataVisualizer : INodeDataTextVisualizer
     {

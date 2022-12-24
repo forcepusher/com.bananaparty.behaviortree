@@ -10,10 +10,5 @@
         {
             _inverted = inverted;
         }
-
-        protected override BehaviorNodeStatus OnRunning()
-        {
-            return BehaviorNodeStatus.Running;
-        }
     }
 }
