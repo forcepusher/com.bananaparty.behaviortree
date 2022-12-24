@@ -30,13 +30,13 @@
 
         protected override BehaviorNodeStatus OnSuccess()
         {
-            if (!Inverted) return PassNext();
-            else return BehaviorNodeStatus.Failure;
+            if (!Inverted) return PassNext(BehaviorNodeStatus.Success);
+            else return BehaviorNodeStatus.Success;
         }
 
         protected override BehaviorNodeStatus OnFailure()
         {
-            if (Inverted) return PassNext();
+            if (Inverted) return PassNext(BehaviorNodeStatus.Failure);
             else return BehaviorNodeStatus.Failure;
         }
 
@@ -46,10 +46,10 @@
             _nextNode?.Restart();
         }
 
-        protected BehaviorNodeStatus PassNext()
+        protected BehaviorNodeStatus PassNext(BehaviorNodeStatus result)
         {
             if (_nextNode != null) return _nextNode.Execute();
-            else return BehaviorNodeStatus.Success;
+            else return result;
         }
     }
 }

@@ -13,8 +13,9 @@
 
         protected override BehaviorNodeStatus OnRunning()
         {
-            BehaviorNodeStatus result = PassNext();
-            return result == BehaviorNodeStatus.Failure ? BehaviorNodeStatus.Failure : BehaviorNodeStatus.Running;
+            BehaviorNodeStatus result = PassNext(BehaviorNodeStatus.Running);
+            var resultState = _inverted ? BehaviorNodeStatus.Success : BehaviorNodeStatus.Failure;
+            return result == resultState ? resultState : BehaviorNodeStatus.Running;
         }
     }
 }
