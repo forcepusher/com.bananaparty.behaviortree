@@ -4,6 +4,8 @@
     {
         protected readonly BehaviorNodeStatus _statusToReturn;
 
+        protected override string Name => $"Constant Node {_statusToReturn}";
+
         public ConstantNode(BehaviorNodeStatus statusToReturn)
         {
             _statusToReturn = statusToReturn;

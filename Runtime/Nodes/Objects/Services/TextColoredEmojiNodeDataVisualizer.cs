@@ -28,7 +28,6 @@ namespace BananaParty.BehaviorTree
                 BehaviorNodeType.ParallelSelector => "\ue4c2\uf059",
                 BehaviorNodeType.Chain => "\uf0c1",
                 BehaviorNodeType.Decorator => "\uf06b",
-                //BehaviorNodeType.Leaf => "\uf06c",
                 _ => string.Empty,
             };
         }
@@ -40,7 +39,6 @@ namespace BananaParty.BehaviorTree
                 BehaviorNodeStatus.Success => "\u2705",
                 BehaviorNodeStatus.Failure => "\u274E",
                 BehaviorNodeStatus.Running => "\U0001F504",
-                //_ => "\u23F8",
                 _ => string.Empty,
             };
         }
@@ -56,24 +54,11 @@ namespace BananaParty.BehaviorTree
             };
         }
 
-        private string DisplayCustomName(BehaviorNodeType type)
-        {
-            return type switch
-            {
-                BehaviorNodeType.Sequence => "Sequence",
-                BehaviorNodeType.Selector => "Fallback",
-                BehaviorNodeType.ParallelSequence => "Parallel Sequence",
-                BehaviorNodeType.ParallelSelector => "Parallel Fallback",
-                _ => string.Empty,
-            };
-        }
-
         private string DisplayNode(BehaviorNodeVisualizationData node)
         {
             var type = DisplayType(node.Type);
             var state = DisplayStatus(node.State);
-            var customName = DisplayCustomName(node.Type);
-            var name = string.IsNullOrEmpty(customName) ? node.Name : customName;
+            var name = node.Name;
 
             var stateIsNull = string.IsNullOrEmpty(state);
             var typeIsNull = string.IsNullOrEmpty(type);

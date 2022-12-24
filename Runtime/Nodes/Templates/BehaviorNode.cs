@@ -1,11 +1,16 @@
-﻿namespace BananaParty.BehaviorTree
+﻿using System.Text.RegularExpressions;
+using System;
+
+namespace BananaParty.BehaviorTree
 {
     public abstract class BehaviorNode : IBehaviorNode
     {
         protected BehaviorNodeStatus _state = BehaviorNodeStatus.Idle;
         private bool IsNotFinished => (int)_state < 2;
         protected virtual BehaviorNodeType Type => BehaviorNodeType.Leaf;
-        protected virtual string Name => Type.ToString();
+        protected virtual string Name => CalculateName(Type.ToString());
+
+        private string _calculatedName = string.Empty;
 
         public BehaviorNodeStatus Execute()
         {
@@ -48,6 +53,17 @@
                 BehaviorNodeStatus.Failure => OnFailure(),
                 _ => OnRunning(),
             };
+        }
+
+        private string CalculateName(string name)
+        {
+            if (string.IsNullOrEmpty(_calculatedName))
+            {
+                string pattern = "([a-z])([A-Z])";
+                string replacement = "$1 $2";
+                _calculatedName = Regex.Replace(name, pattern, replacement);
+            }
+            return _calculatedName;
         }
     }
 }
