@@ -4,7 +4,6 @@
     {
         public int ExecutionCount { get; private set; } = 0;
         public BehaviorNodeStatus ResultStatus { get; set; } = BehaviorNodeStatus.Idle;
-        
 
         public InvocationTestNode(BehaviorNodeStatus statusToReturn)
         {

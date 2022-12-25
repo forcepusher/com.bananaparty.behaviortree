@@ -61,7 +61,7 @@
 
         protected IRollbackChainNode CloneNextNode()
         {
-            return _nextNode.Clone();
+            return _nextNode?.Clone();
         }
     }
 }
