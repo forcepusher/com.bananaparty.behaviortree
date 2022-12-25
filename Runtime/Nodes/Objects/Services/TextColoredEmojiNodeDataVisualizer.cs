@@ -27,6 +27,7 @@
                 BehaviorNodeType.Selector => "\uf059",
                 BehaviorNodeType.ParallelSequence => "\ue4c2\uf0a9",
                 BehaviorNodeType.ParallelSelector => "\ue4c2\uf059",
+                BehaviorNodeType.ParallelFirstComplete => "\ue4c2\uf091",
                 BehaviorNodeType.Chain => "\uf0c1",
                 BehaviorNodeType.Decorator => "\uf06b",
                 _ => string.Empty,

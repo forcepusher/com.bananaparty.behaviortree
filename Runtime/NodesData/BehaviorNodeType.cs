@@ -8,6 +8,7 @@
         Sequence,
         Selector,
         ParallelSequence,
-        ParallelSelector
+        ParallelSelector,
+        ParallelFirstComplete
     }
 }
