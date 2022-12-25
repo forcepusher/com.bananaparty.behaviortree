@@ -2,7 +2,9 @@
     "name": "BananaParty.BehaviorTree.Tests",
     "rootNamespace": "",
     "references": [
-        "GUID:9503a1d62ef696340b44109afe91fb39"
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+        "BananaParty.BehaviorTree"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -16,5 +18,5 @@
         "UNITY_INCLUDE_TESTS"
     ],
     "versionDefines": [],
-    "noEngineReferences": true
+    "noEngineReferences": false
 }

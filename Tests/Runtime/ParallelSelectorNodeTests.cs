@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Numerics;
 
 namespace BananaParty.BehaviorTree.Tests
 {
@@ -17,19 +18,30 @@ namespace BananaParty.BehaviorTree.Tests
             var parallelNode = new ParallelSelectorNode(testNodes);
             var nodeStatusResult = parallelNode.Execute();
 
-            Assert.IsFalse(StatusIsFinished(nodeStatusResult), $"Finished too early.");
+            Assert.IsTrue(nodeStatusResult == BehaviorNodeStatus.Running, $"Finished too early.");
 
-            testNodes[1].Status = BehaviorNodeStatus.Success;
+            testNodes[1].ResultStatus = BehaviorNodeStatus.Failure;
+            testNodes[2].ResultStatus = BehaviorNodeStatus.Failure;
 
             nodeStatusResult = parallelNode.Execute();
 
-            Assert.IsTrue(StatusIsFinished(nodeStatusResult),
+            Assert.IsTrue(nodeStatusResult == BehaviorNodeStatus.Failure,
                 $"Did not finish. {nameof(nodeStatusResult)} = {nodeStatusResult}");
         }
 
-        private bool StatusIsFinished(BehaviorNodeStatus status)
+        [Test]
+        public void ShouldStopAfterSuccess()
         {
-            return (int)status > 1;
+            InvocationTestNode[] testNodes = new[]
+            {
+                new InvocationTestNode(BehaviorNodeStatus.Success),
+                new InvocationTestNode(BehaviorNodeStatus.Failure)
+            };
+
+            var resultStatus = new ParallelSelectorNode(testNodes).Execute();
+
+            Assert.IsTrue(resultStatus == BehaviorNodeStatus.Success);
+            Assert.IsTrue(testNodes[0].ExecutionCount == 1 && testNodes[1].ExecutionCount == 0);
         }
     }
 }

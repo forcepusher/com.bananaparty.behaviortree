@@ -4,14 +4,14 @@ namespace BananaParty.BehaviorTree
 {
     public class Timer : ITimer
     {
-        private readonly int _seconds;
+        private readonly double _seconds;
         private DateTime _endTime;
         private bool _isStarted = false;
 
         /// <summary>
         /// A timer that will count down the specified number of <paramref name="seconds"/>.
         /// </summary>
-        public Timer(int seconds)
+        public Timer(double seconds)
         {
             _seconds = seconds;
         }
