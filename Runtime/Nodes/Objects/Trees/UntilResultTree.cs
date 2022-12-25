@@ -1,5 +1,8 @@
 ﻿namespace BananaParty.BehaviorTree
 {
+    /// <summary>
+    /// Returns true if the tree has ended.
+    /// </summary>
     public class UntilResultTree : BehaviorTree
     {
         public UntilResultTree(IBehaviorNode node, IBehaviorTreeVisualizer visualizer = null) : base(node, visualizer) { }

@@ -5,6 +5,9 @@
         private int _repetitionCount;
         private int _currentCount = 0;
 
+        /// <summary>
+        /// Allows the child node to be executed the specified <paramref name="repetitionCount"/> of times, returning a value of Running.
+        /// </summary>
         public LimiterNode(IBehaviorNode childNode, int repetitionCount = 1) : base(childNode)
         {
             _repetitionCount = repetitionCount > 0 ? repetitionCount : 1;

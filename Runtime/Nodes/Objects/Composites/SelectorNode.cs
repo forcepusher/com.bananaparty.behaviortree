@@ -1,5 +1,8 @@
 ﻿namespace BananaParty.BehaviorTree
 {
+    /// <summary>
+    /// If Failure then Tick Next else Return "same as child".
+    /// </summary>
     public class SelectorNode : ChainHandlerNode
     {
         protected override bool IsContinuous => _isContinuous;

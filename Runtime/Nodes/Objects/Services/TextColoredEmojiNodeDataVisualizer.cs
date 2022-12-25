@@ -1,8 +1,11 @@
 ﻿namespace BananaParty.BehaviorTree
 {
+    /// <summary>
+    /// Displays the specified node as colored text with emoji.
+    /// (To display this in Unity you can use FontAwesome as Fallback Font Asset)
+    /// </summary>
     public class TextColoredEmojiNodeDataVisualizer : INodeDataTextVisualizer
     {
-        // To display this in Unity you can use FontAwesome as Fallback Font Asset
         public string Display(BehaviorNodeVisualizationData node)
         {
             var color = DisplayColor(node.State);

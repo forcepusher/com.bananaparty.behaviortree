@@ -11,9 +11,12 @@ namespace BananaParty.BehaviorTree
         private bool _treeIsNotGenerated = true;
         private bool _dontDisplayChains;
 
-        public TextBehaviorTreeVisualizer(ITextDisplay display, INodeDataTextVisualizer nodeVisualizer, bool dontDisplayChains = true)
+        /// <summary>
+        /// Allows you to display the node on the <paramref name="textDisplay"/> using the <paramref name="nodeVisualizer"/>.
+        /// </summary>
+        public TextBehaviorTreeVisualizer(ITextDisplay textDisplay, INodeDataTextVisualizer nodeVisualizer, bool dontDisplayChains = true)
         {
-            _display = display;
+            _display = textDisplay;
             _nodeVisualizer = nodeVisualizer;
             _dontDisplayChains = dontDisplayChains;
         }

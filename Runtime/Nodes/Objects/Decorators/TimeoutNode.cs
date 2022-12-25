@@ -4,6 +4,9 @@
     {
         private readonly ITimer _timer;
 
+        /// <summary>
+        /// When executed, starts the specified <paramref name="timer"/>. If the timer has completed its work, then the child node executes.
+        /// </summary>
         public TimeoutNode(IBehaviorNode childNode, ITimer timer) : base(childNode)
         {
             _timer = timer;

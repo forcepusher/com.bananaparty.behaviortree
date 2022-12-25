@@ -1,5 +1,8 @@
 ﻿namespace BananaParty.BehaviorTree
 {
+    /// <summary>
+    /// If Failure or Running then Tick Next else Return "same as child".
+    /// </summary>
     public class ParallelSelectorNode : ChainHandlerNode
     {
         protected override bool IsContinuous => false;

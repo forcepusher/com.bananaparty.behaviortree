@@ -4,6 +4,9 @@
     {
         private readonly ITimer _timer;
 
+        /// <summary>
+        /// Waits until the <paramref name="timer"/> expires. Returns Success on completion.
+        /// </summary>
         public WaitNode(ITimer timer)
         {
             _timer = timer;

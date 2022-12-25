@@ -1,5 +1,8 @@
 ﻿namespace BananaParty.BehaviorTree
 {
+    /// <summary>
+    /// A link in a chain that provides consistent chain logic.
+    /// </summary>
     public class SequenceChainNode : ChainNode
     {
         protected override bool Inverted => _inverted;

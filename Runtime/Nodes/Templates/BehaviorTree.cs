@@ -25,6 +25,11 @@
         protected abstract bool OnFailure();
         protected abstract bool OnRunning();
 
+        protected void Reset()
+        {
+            _node.Restart();
+        }
+
         private bool PublishFinishedState(BehaviorNodeStatus state)
         {
             return state switch

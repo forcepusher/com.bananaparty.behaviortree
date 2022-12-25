@@ -1,5 +1,8 @@
 ﻿namespace BananaParty.BehaviorTree
 {
+    /// <summary>
+    /// Displays the specified node as text.
+    /// </summary>
     public class TextNodeDataVisualizer : INodeDataTextVisualizer
     {
         public string Display(BehaviorNodeVisualizationData node)

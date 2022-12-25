@@ -4,6 +4,9 @@
     {
         private readonly BehaviorNodeFinishStatus _stopStatus;
 
+        /// <summary>
+        /// Until the child node returns a <paramref name="stopStatus"/>, returns Running.
+        /// </summary>
         public RepeatNode(IBehaviorNode childNode, BehaviorNodeFinishStatus stopStatus) : base(childNode)
         {
             _stopStatus = stopStatus;

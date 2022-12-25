@@ -6,6 +6,9 @@
 
         protected override string Name => $"Constant Node {_statusToReturn}";
 
+        /// <summary>
+        /// Always returns the specified <paramref name="statusToReturn"/>.
+        /// </summary>
         public ConstantNode(BehaviorNodeStatus statusToReturn)
         {
             _statusToReturn = statusToReturn;
