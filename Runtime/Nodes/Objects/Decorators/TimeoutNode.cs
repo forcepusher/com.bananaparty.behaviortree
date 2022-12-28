@@ -7,7 +7,9 @@
         private readonly ITimer _timer;
 
         /// <summary>
-        /// When executed, starts the specified <paramref name="timer"/>. If the timer has completed its work, then the child node executes.
+        /// Executes the node while the <paramref name="timer"/> is running.
+        /// If the <paramref name="timer"/> has expired and the node has not
+        /// returned anything other than Running, then it returns a Failure.
         /// </summary>
         public TimeoutNode(IBehaviorNode childNode, ITimer timer) : base(childNode)
         {
@@ -16,7 +18,7 @@
 
         protected override BehaviorNodeStatus OnRunning()
         {
-            if (_timer.IsEnded()) _timer.Reset();
+            if (_timer.IsEnded()) return BehaviorNodeStatus.Failure;
             return base.OnRunning();
         }
 
