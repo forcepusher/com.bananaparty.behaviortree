@@ -11,7 +11,7 @@
 
         private readonly bool _isContinuous;
 
-        public SequenceNode(IBehaviorNode[] childNodes, bool isContinuous = false) : base(childNodes)
+        public SequenceNode(IBehaviorNode[] childNodes, bool isContinuous = true) : base(childNodes)
         {
             _isContinuous = isContinuous;
         }

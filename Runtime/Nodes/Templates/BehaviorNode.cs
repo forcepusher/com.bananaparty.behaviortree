@@ -14,8 +14,8 @@ namespace BananaParty.BehaviorTree
         public BehaviorNodeStatus Execute()
         {
             if (IsNotFinished)
-                _state = OnExecute();
-            return PublishFinishedState();
+                _state = PublishFinishedState(OnExecute());
+            return _state;
         }
 
         public void Restart()
@@ -44,9 +44,9 @@ namespace BananaParty.BehaviorTree
 
         protected abstract BehaviorNodeStatus OnExecute();
 
-        private BehaviorNodeStatus PublishFinishedState()
+        private BehaviorNodeStatus PublishFinishedState(BehaviorNodeStatus status)
         {
-            return _state switch
+            return status switch
             {
                 BehaviorNodeStatus.Success => OnSuccess(),
                 BehaviorNodeStatus.Failure => OnFailure(),

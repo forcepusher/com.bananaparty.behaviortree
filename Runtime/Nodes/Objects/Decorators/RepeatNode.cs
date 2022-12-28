@@ -14,7 +14,7 @@
 
         protected override BehaviorNodeStatus OnSuccess()
         {
-            if (_stopStatus != BehaviorNodeFinishStatus.Success)
+            if (_stopStatus == BehaviorNodeFinishStatus.Success)
                 return base.OnSuccess();
             Restart();
             return BehaviorNodeStatus.Running;
@@ -22,7 +22,7 @@
 
         protected override BehaviorNodeStatus OnFailure()
         {
-            if (_stopStatus != BehaviorNodeFinishStatus.Success)
+            if (_stopStatus == BehaviorNodeFinishStatus.Failure)
                 return base.OnFailure();
             Restart();
             return BehaviorNodeStatus.Running;
