@@ -5,6 +5,8 @@
     /// </summary>
     public class InverterNode : DecoratorNode
     {
+        protected override string Name => "Inverter Node";
+
         public InverterNode(IBehaviorNode childNode) : base(childNode) { }
 
         protected override BehaviorNodeStatus OnSuccess()

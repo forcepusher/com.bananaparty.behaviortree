@@ -4,6 +4,8 @@ namespace BananaParty.BehaviorTree
 {
     public class TraceWarningNode : BehaviorNode
     {
+        protected override string Name => "Trace Warning Node";
+
         private readonly string _message;
 
         public TraceWarningNode(string message)

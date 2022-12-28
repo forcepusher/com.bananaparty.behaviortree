@@ -2,6 +2,8 @@
 {
     public class RollbackSequenceNode : RollbackChainHandlerNode
     {
+        protected override string Name => "Rollback Sequence Node";
+
         protected override bool IsContinuous => _isContinuous;
 
         protected override BehaviorNodeType Type => BehaviorNodeType.Sequence;

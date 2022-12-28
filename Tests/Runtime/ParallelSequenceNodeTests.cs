@@ -21,7 +21,7 @@ namespace BananaParty.BehaviorTree.Tests
 
             testNodes[0].ResultStatus = BehaviorNodeStatus.Success;
             testNodes[2].ResultStatus = BehaviorNodeStatus.Success;
-             
+
             nodeStatusResult = parallelNode.Execute();
 
             Assert.IsTrue(nodeStatusResult == BehaviorNodeStatus.Success,

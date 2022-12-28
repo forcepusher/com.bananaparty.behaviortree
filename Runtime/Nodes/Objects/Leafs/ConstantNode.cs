@@ -2,9 +2,9 @@
 {
     public class ConstantNode : BehaviorNode
     {
-        protected readonly BehaviorNodeStatus _statusToReturn;
-
         protected override string Name => $"Constant Node {_statusToReturn}";
+
+        protected readonly BehaviorNodeStatus _statusToReturn;
 
         /// <summary>
         /// Always returns the specified <paramref name="statusToReturn"/>.

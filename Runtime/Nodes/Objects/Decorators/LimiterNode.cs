@@ -2,6 +2,8 @@
 {
     public class LimiterNode : DecoratorNode
     {
+        protected override string Name => "Limiter Node";
+
         private int _repetitionCount;
         private int _currentCount = 0;
 

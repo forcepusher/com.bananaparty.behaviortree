@@ -5,6 +5,8 @@
     /// </summary>
     public class ParallelChainNode : ChainNode
     {
+        protected override string Name => "Parallel Chain Node";
+
         protected override bool Inverted => _inverted;
 
         private readonly bool _inverted;

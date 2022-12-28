@@ -5,6 +5,8 @@
     /// </summary>
     public class FailerNode : DecoratorNode
     {
+        protected override string Name => "Failer Node";
+
         public FailerNode(IBehaviorNode childNode) : base(childNode) { }
 
         protected override BehaviorNodeStatus OnSuccess()

@@ -5,6 +5,8 @@
     /// </summary>
     public class SelectorNode : ChainHandlerNode
     {
+        protected override string Name => "Selector Node";
+
         protected override bool IsContinuous => _isContinuous;
 
         protected override BehaviorNodeType Type => BehaviorNodeType.Selector;

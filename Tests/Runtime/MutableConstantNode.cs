@@ -2,6 +2,8 @@
 {
     public class MutableConstantNode : BehaviorNode
     {
+        protected override string Name => "Mutable Constant Node";
+
         public MutableConstantNode(BehaviorNodeStatus startExecutionStatus)
         {
             NextExecutionStatus = startExecutionStatus;

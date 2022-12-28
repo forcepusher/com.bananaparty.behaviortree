@@ -5,6 +5,8 @@
     /// </summary>
     public class ParallelSequenceNode : ChainHandlerNode
     {
+        protected override string Name => "Parallel Sequence Node";
+
         protected override bool IsContinuous => false;
 
         protected override BehaviorNodeType Type => BehaviorNodeType.ParallelSequence;

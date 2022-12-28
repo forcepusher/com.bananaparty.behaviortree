@@ -5,6 +5,8 @@
     /// </summary>
     public class ParallelFirstCompleteNode : ChainHandlerNode
     {
+        protected override string Name => "Parallel First Complete Node";
+
         protected override bool IsContinuous => false;
 
         protected override BehaviorNodeType Type => BehaviorNodeType.ParallelFirstComplete;

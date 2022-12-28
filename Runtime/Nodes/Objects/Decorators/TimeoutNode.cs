@@ -2,6 +2,8 @@
 {
     public class TimeoutNode : DecoratorNode
     {
+        protected override string Name => "Timeout Node";
+
         private readonly ITimer _timer;
 
         /// <summary>

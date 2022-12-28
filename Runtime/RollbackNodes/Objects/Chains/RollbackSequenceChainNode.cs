@@ -2,6 +2,8 @@
 {
     public class RollbackSequenceChainNode : RollbackChainNode
     {
+        protected override string Name => "Rollback Sequence ChainNode";
+
         protected override bool Inverted => _inverted;
 
         private readonly bool _inverted;

@@ -2,6 +2,8 @@
 {
     public class WaitNode : BehaviorNode
     {
+        protected override string Name => "Wait Node";
+
         private readonly ITimer _timer;
 
         /// <summary>

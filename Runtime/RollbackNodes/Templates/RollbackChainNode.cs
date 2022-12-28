@@ -17,14 +17,9 @@
 
         public override BehaviorNodeVisualizationData GetVisualizationData()
         {
-            return new BehaviorNodeVisualizationData()
-            {
-                Name = Name,
-                State = _state,
-                Type = Type,
-                ChildNode = GetChildVisualizationData(),
-                NextNode = _nextNode.GetVisualizationData(),
-            };
+            var childVisualization = GetChildVisualizationData();
+            childVisualization.NextNode = _nextNode?.GetVisualizationData();
+            return childVisualization;
         }
 
         public void AddNextChainLink(IRollbackChainNode nextNode)

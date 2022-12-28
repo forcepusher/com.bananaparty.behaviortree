@@ -2,6 +2,8 @@
 {
     public class RepeatNode : DecoratorNode
     {
+        protected override string Name => "Repeat Node";
+
         private readonly BehaviorNodeFinishStatus _stopStatus;
 
         /// <summary>

@@ -2,6 +2,8 @@
 {
     public class InvocationRollbackTestNode : RollbackNode
     {
+        protected override string Name => "Invocation Rollback Test Node";
+
         public int ExecutionCount { get; private set; } = 0;
         public BehaviorNodeStatus ResultStatus { get; set; } = BehaviorNodeStatus.Idle;
 

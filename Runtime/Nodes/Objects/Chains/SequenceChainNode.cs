@@ -5,6 +5,8 @@
     /// </summary>
     public class SequenceChainNode : ChainNode
     {
+        protected override string Name => "Sequence Chain Node";
+
         protected override bool Inverted => _inverted;
 
         private readonly bool _inverted;
