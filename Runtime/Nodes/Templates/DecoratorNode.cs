@@ -24,7 +24,7 @@
 
         protected override void OnRestart()
         {
-            _childNode.Restart();
+            RestartChild();
         }
 
         protected override BehaviorNodeStatus OnExecute()
@@ -35,6 +35,11 @@
         protected BehaviorNodeVisualizationData GetChildVisualizationData()
         {
             return _childNode.GetVisualizationData();
+        }
+
+        protected void RestartChild()
+        {
+            _childNode.Restart();
         }
     }
 }

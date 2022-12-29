@@ -7,8 +7,6 @@
     {
         protected override string Name => "Parallel Sequence Node";
 
-        protected override bool IsContinuous => false;
-
         protected override BehaviorNodeType Type => BehaviorNodeType.ParallelSequence;
 
         public ParallelSequenceNode(IBehaviorNode[] childNodes) : base(childNodes) { }

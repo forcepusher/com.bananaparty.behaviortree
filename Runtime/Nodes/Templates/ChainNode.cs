@@ -38,6 +38,11 @@
         protected override void OnRestart()
         {
             base.OnRestart();
+            RestartNextNode();
+        }
+
+        protected void RestartNextNode()
+        {
             _nextNode?.Restart();
         }
 

@@ -45,7 +45,7 @@
         protected override void OnRestart()
         {
             base.OnRestart();
-            _nextNode?.Restart();
+            RestartNextNode();
         }
 
         protected BehaviorNodeStatus PassNext(BehaviorNodeStatus result)
@@ -57,6 +57,11 @@
         protected IRollbackChainNode CloneNextNode()
         {
             return _nextNode?.Clone();
+        }
+
+        protected void RestartNextNode()
+        {
+            _nextNode?.Restart();
         }
     }
 }

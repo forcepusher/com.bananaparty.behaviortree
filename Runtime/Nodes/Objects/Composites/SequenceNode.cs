@@ -7,20 +7,16 @@
     {
         protected override string Name => "Sequence Node";
 
-        protected override bool IsContinuous => _isContinuous;
-
         protected override BehaviorNodeType Type => BehaviorNodeType.Sequence;
 
-        private readonly bool _isContinuous;
 
-        public SequenceNode(IBehaviorNode[] childNodes, bool isContinuous = true) : base(childNodes)
+        public SequenceNode(IBehaviorNode[] childNodes, bool isContinuous = true) : base(childNodes, isContinuous)
         {
-            _isContinuous = isContinuous;
         }
 
         protected override IChainNode InstantiateChainNode(IBehaviorNode node)
         {
-            return new SequenceChainNode(node, false);
+            return new SequenceChainNode(node, false, IsContinuous);
         }
     }
 }

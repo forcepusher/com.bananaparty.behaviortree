@@ -7,20 +7,15 @@
     {
         protected override string Name => "Selector Node";
 
-        protected override bool IsContinuous => _isContinuous;
-
         protected override BehaviorNodeType Type => BehaviorNodeType.Selector;
 
-        private readonly bool _isContinuous;
-
-        public SelectorNode(IBehaviorNode[] childNodes, bool isContinuous = true) : base(childNodes)
+        public SelectorNode(IBehaviorNode[] childNodes, bool isContinuous = true) : base(childNodes, isContinuous)
         {
-            _isContinuous = isContinuous;
         }
 
         protected override IChainNode InstantiateChainNode(IBehaviorNode node)
         {
-            return new SequenceChainNode(node, true);
+            return new SequenceChainNode(node, true, IsContinuous);
         }
     }
 }

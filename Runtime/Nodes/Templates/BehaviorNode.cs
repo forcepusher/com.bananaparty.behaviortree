@@ -16,6 +16,7 @@
 
         public void Restart()
         {
+            if (_state == BehaviorNodeStatus.Idle) return;
             _state = BehaviorNodeStatus.Idle;
             OnRestart();
         }

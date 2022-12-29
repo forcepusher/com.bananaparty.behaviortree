@@ -7,8 +7,6 @@
     {
         protected override string Name => "Parallel Selector Node";
 
-        protected override bool IsContinuous => false;
-
         protected override BehaviorNodeType Type => BehaviorNodeType.ParallelSelector;
 
         public ParallelSelectorNode(IBehaviorNode[] childNodes) : base(childNodes) { }

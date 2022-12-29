@@ -2,12 +2,13 @@
 {
     public abstract class RollbackChainHandlerNode : BehaviorNode, IRollbackNode
     {
-        protected abstract bool IsContinuous { get; }
+        protected bool IsContinuous { private set; get; }
 
         protected IRollbackChainNode _chain;
 
-        public RollbackChainHandlerNode(IRollbackNode[] childNodes)
+        public RollbackChainHandlerNode(IRollbackNode[] childNodes, bool isContinuous = true)
         {
+            IsContinuous = isContinuous;
             _chain = InstantiateChainNode(childNodes[0]);
             AddNodesToChain(childNodes);
         }
@@ -31,7 +32,6 @@
 
         protected override BehaviorNodeStatus OnExecute()
         {
-            if (!IsContinuous) _chain.Restart();
             return _chain.Execute();
         }
 

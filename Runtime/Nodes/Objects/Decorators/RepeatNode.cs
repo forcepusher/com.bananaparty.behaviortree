@@ -18,7 +18,7 @@
         {
             if (_stopStatus == BehaviorNodeFinishStatus.Success)
                 return base.OnSuccess();
-            Restart();
+            RestartChild();
             return BehaviorNodeStatus.Running;
         }
 
@@ -26,7 +26,7 @@
         {
             if (_stopStatus == BehaviorNodeFinishStatus.Failure)
                 return base.OnFailure();
-            Restart();
+            RestartChild();
             return BehaviorNodeStatus.Running;
         }
     }

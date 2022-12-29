@@ -7,8 +7,6 @@
     {
         protected override string Name => "Parallel First Complete Node";
 
-        protected override bool IsContinuous => false;
-
         protected override BehaviorNodeType Type => BehaviorNodeType.ParallelFirstComplete;
 
         public ParallelFirstCompleteNode(IBehaviorNode[] childNodes) : base(childNodes) { }

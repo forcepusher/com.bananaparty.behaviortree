@@ -67,5 +67,49 @@ namespace BananaParty.BehaviorTree.Tests
             Assert.IsTrue(cloneResult == BehaviorNodeStatus.Success);
             Assert.IsTrue(testNodes[0].ExecutionCount == 1);
         }
+
+        [Test]
+        public void MustRespondToInterrupt()
+        {
+            InvocationRollbackTestNode[] testNodes = new[]
+            {
+                new InvocationRollbackTestNode(BehaviorNodeStatus.Failure),
+                new InvocationRollbackTestNode(BehaviorNodeStatus.Running)
+            };
+
+            var node = new RollbackSelectorNode(testNodes, false);
+            var resultStatus = node.Execute();
+
+            Assert.IsTrue(resultStatus == BehaviorNodeStatus.Running);
+            Assert.IsTrue(testNodes[0].ExecutionCount == 1 && testNodes[1].ExecutionCount == 1);
+
+            testNodes[0].ResultStatus = BehaviorNodeStatus.Success;
+            resultStatus = node.Execute();
+
+            Assert.IsTrue(resultStatus == BehaviorNodeStatus.Success);
+            Assert.IsTrue(testNodes[0].ExecutionCount == 2 && testNodes[1].ExecutionCount == 1);
+        }
+
+        [Test]
+        public void MustNotRespondToInterrupt()
+        {
+            InvocationRollbackTestNode[] testNodes = new[]
+            {
+                new InvocationRollbackTestNode(BehaviorNodeStatus.Failure),
+                new InvocationRollbackTestNode(BehaviorNodeStatus.Running)
+            };
+
+            var node = new RollbackSelectorNode(testNodes, true);
+            var resultStatus = node.Execute();
+
+            Assert.IsTrue(resultStatus == BehaviorNodeStatus.Running);
+            Assert.IsTrue(testNodes[0].ExecutionCount == 1 && testNodes[1].ExecutionCount == 1);
+
+            testNodes[0].ResultStatus = BehaviorNodeStatus.Success;
+            resultStatus = node.Execute();
+
+            Assert.IsTrue(resultStatus == BehaviorNodeStatus.Running);
+            Assert.IsTrue(testNodes[0].ExecutionCount == 1 && testNodes[1].ExecutionCount == 2);
+        }
     }
 }

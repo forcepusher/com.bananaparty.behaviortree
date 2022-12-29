@@ -24,7 +24,7 @@
 
         protected override void OnRestart()
         {
-            _childNode.Restart();
+            RestartChild();
         }
 
         protected override BehaviorNodeStatus OnExecute()
@@ -40,6 +40,11 @@
         protected IRollbackNode CloneChild()
         {
             return _childNode.Clone();
+        }
+
+        protected void RestartChild()
+        {
+            _childNode.Restart();
         }
     }
 }
