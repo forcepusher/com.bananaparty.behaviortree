@@ -9,14 +9,12 @@
         public BehaviorNodeStatus Status { get; set; }
 
         /// <summary>
+        /// Returns true when status is either Success or Failure.<br/>
         /// Convenience property to avoid writing the whole status check thing.
         /// </summary>
         public bool Finished => Status > BehaviorNodeStatus.Running;
 
-        /// <summary>
-        /// Convenience property to make things easier to understand... sometimes.
-        /// </summary>
-        public bool Started => Status != BehaviorNodeStatus.Idle;
+        public abstract bool ReactiveEvaluation { get; }
 
         public BehaviorNodeStatus Execute(long time)
         {
@@ -25,26 +23,26 @@
         }
 
         /// <remarks>
-        /// Does not require calling base class method when overriding, as it's a callback method.
+        /// Does not require calling base class method when overriding. It's a callback method.
         /// </remarks>
         public abstract BehaviorNodeStatus OnExecute(long time);
 
-        /// <remarks>
-        /// Requires calling base class method when overriding, as it's not a callback method.
-        /// </remarks>
-        public virtual void Reset()
+        public void Reset()
         {
+            OnReset();
             Status = BehaviorNodeStatus.Idle;
         }
 
         /// <remarks>
-        /// Requires calling base class getter when overriding, as it's not a callback method
+        /// Does not require calling base class method when overriding. It's a callback method.
+        /// If the current <see cref="Status"/> was <see cref="BehaviorNodeStatus.Running"/>, then it's an interruption.<br/>
         /// </remarks>
+        public virtual void OnReset() { }
+
         public virtual string Name
         {
             get
             {
-                // I know, GetType() is a dirty shortcut. Give me a break, it's only for debugging.
                 string typeName = GetType().Name;
                 int postfixStartIndex = typeName.LastIndexOf("Node");
                 if (postfixStartIndex == -1)
@@ -54,9 +52,6 @@
             }
         }
 
-        /// <remarks>
-        /// Requires calling base class method when overriding, as it's not a callback method.
-        /// </remarks>
         public virtual void WriteToGraph(ITreeGraph<IReadOnlyBehaviorNode> nodeGraph)
         {
             nodeGraph.Write(this);

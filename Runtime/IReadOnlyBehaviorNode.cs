@@ -7,14 +7,21 @@
     public interface IReadOnlyBehaviorNode
     {
         /// <summary>
-        /// Human-readable node name.
-        /// </summary>
-        string Name { get; }
-
-        /// <summary>
         /// Current execution state.
         /// </summary>
         BehaviorNodeStatus Status { get; }
+
+        /// <summary>
+        /// Whether the node should be reevaluated when using "Conditional Aborts" or "Reactive Evaluation".<br/>
+        /// <see href="https://opsive.com/support/documentation/behavior-designer/conditional-aborts/"/><br/>
+        /// <see href="https://nodecanvas.paradoxnotion.com/documentation/?section=reactive-evaluation"/>
+        /// </summary>
+        bool ReactiveEvaluation { get; }
+
+        /// <summary>
+        /// Human-readable node name.
+        /// </summary>
+        string Name { get; }
 
         /// <summary>
         /// Outputs the node and all of its children to a human-readable graph.

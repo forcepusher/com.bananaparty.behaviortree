@@ -9,6 +9,8 @@
 
         private readonly string _descriptionPrefix;
 
+        public override bool ReactiveEvaluation => false;
+
         public ParallelCompositeNode(IBehaviorNode[] childNodes, string descriptionPrefix)
         {
             ChildNodes = childNodes;
@@ -49,10 +51,8 @@
             return BehaviorNodeStatus.Running;
         }
 
-        public override void Reset()
+        public override void OnReset()
         {
-            base.Reset();
-
             foreach (IBehaviorNode child in ChildNodes)
                 child.Reset();
         }

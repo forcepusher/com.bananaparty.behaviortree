@@ -1,6 +1,6 @@
 ﻿namespace BananaParty.BehaviorTree
 {
-    public class WaitNode : BehaviorNode
+    public class WaitNode : ActionNode
     {
         private readonly long _duration;
 
@@ -24,10 +24,8 @@
                 return BehaviorNodeStatus.Success;
         }
 
-        public override void Reset()
+        public override void OnReset()
         {
-            base.Reset();
-
             _startTime = -1;
         }
     }

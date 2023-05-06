@@ -1,6 +1,6 @@
 ﻿namespace BananaParty.BehaviorTree
 {
-    public class ConstantNode : BehaviorNode
+    public class ConstantNode : ActionNode
     {
         private readonly BehaviorNodeStatus _statusToReturn;
 
@@ -14,6 +14,6 @@
             return _statusToReturn;
         }
 
-        public override string Name => $"{base.Name} {_statusToReturn}";
+        public override string Name => $"{base.Name}:{_statusToReturn}";
     }
 }

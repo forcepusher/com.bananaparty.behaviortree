@@ -15,6 +15,7 @@ namespace BananaParty.BehaviorTree
 
         /// <summary>
         /// Interrupts execution and resets state of the node and its children.<br/>
+        /// Used for both resetting and interrupting node execution.<br/>
         /// <see cref="IReadOnlyBehaviorNode.Status"/> is set back to <see cref="BehaviorNodeStatus.Idle"/>.
         /// </summary>
         void Reset();

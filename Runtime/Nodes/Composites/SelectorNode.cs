@@ -2,7 +2,7 @@
 {
     public class SelectorNode : SequentialCompositeNode
     {
-        public SelectorNode(IBehaviorNode[] childNodes, bool alwaysReevaluate = false, string descriptionPrefix = "") : base(childNodes, alwaysReevaluate, descriptionPrefix) { }
+        public SelectorNode(IBehaviorNode[] childNodes, bool isReactive = false, string descriptionPrefix = "") : base(childNodes, isReactive, descriptionPrefix) { }
 
         protected override BehaviorNodeStatus ContinueStatus => BehaviorNodeStatus.Failure;
     }

@@ -1,6 +1,6 @@
 ﻿namespace BananaParty.BehaviorTree.Tests
 {
-    public class InvocationTestNode : BehaviorNode
+    public class InvocationTestNode : ActionNode
     {
         public int ExecutionCount { get; private set; } = 0;
 

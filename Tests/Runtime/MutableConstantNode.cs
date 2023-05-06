@@ -1,6 +1,6 @@
 ﻿namespace BananaParty.BehaviorTree.Tests
 {
-    public class MutableConstantNode : BehaviorNode
+    public class MutableConstantNode : ActionNode
     {
         public MutableConstantNode(BehaviorNodeStatus startExecutionStatus)
         {

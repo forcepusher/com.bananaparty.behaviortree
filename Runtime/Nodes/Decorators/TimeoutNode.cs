@@ -35,10 +35,8 @@
             return BehaviorNodeStatus.Failure;
         }
 
-        public override void Reset()
+        public override void OnReset()
         {
-            base.Reset();
-
             _startTime = -1;
         }
     }

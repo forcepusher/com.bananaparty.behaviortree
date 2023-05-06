@@ -7,15 +7,15 @@
     {
         protected readonly IBehaviorNode ChildNode;
 
+        public override bool ReactiveEvaluation => true;
+
         public DecoratorNode(IBehaviorNode childNode)
         {
             ChildNode = childNode;
         }
 
-        public override void Reset()
+        public override void OnReset()
         {
-            base.Reset();
-
             ChildNode.Reset();
         }
 
