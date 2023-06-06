@@ -8,14 +8,6 @@
     {
         public BehaviorNodeStatus Status { get; set; }
 
-        /// <summary>
-        /// Returns true when status is either Success or Failure.<br/>
-        /// Convenience property to avoid writing the whole status check thing.
-        /// </summary>
-        public bool Finished => Status > BehaviorNodeStatus.Running;
-
-        public abstract bool ReactiveEvaluation { get; }
-
         public BehaviorNodeStatus Execute(long time)
         {
             Status = OnExecute(time);

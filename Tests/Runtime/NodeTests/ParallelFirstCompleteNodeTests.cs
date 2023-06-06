@@ -17,13 +17,13 @@ namespace BananaParty.BehaviorTree.Tests
             var parallelNode = new ParallelFirstCompleteNode(testNodes);
             parallelNode.Execute(1);
 
-            Assert.IsFalse(parallelNode.Finished, $"Finished too early.");
+            Assert.IsFalse(parallelNode.Status > BehaviorNodeStatus.Running, $"Finished too early.");
 
             testNodes[1].Status = BehaviorNodeStatus.Failure;
 
             parallelNode.Execute(2);
 
-            Assert.IsTrue(parallelNode.Finished, $"Did not finish. {nameof(parallelNode.Status)} = {parallelNode.Status}");
+            Assert.IsTrue(parallelNode.Status > BehaviorNodeStatus.Running, $"Did not finish. {nameof(parallelNode.Status)} = {parallelNode.Status}");
         }
     }
 }

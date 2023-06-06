@@ -6,7 +6,7 @@
 
         public void WriteState(ISnapshotTree snapshotTree)
         {
-            snapshotTree.Write(new NodeSnapshot(this, Status));
+            snapshotTree.Write(new NodeStatusSnapshot(this, Status));
         }
     }
 }

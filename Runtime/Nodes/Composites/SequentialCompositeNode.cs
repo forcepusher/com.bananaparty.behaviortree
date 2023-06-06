@@ -3,26 +3,23 @@
 namespace BananaParty.BehaviorTree
 {
     /// <remarks>
-    /// Code reusal for non-parallel composites.
+    /// Code reusal for composites.
     /// </remarks>
     public abstract class SequentialCompositeNode : BehaviorNode
     {
         private readonly IBehaviorNode[] _childNodes;
-        private readonly bool _isReactive;
 
         private readonly string _descriptionPrefix;
 
-        public SequentialCompositeNode(IBehaviorNode[] childNodes, bool isReactive, string descriptionPrefix)
+        public SequentialCompositeNode(IBehaviorNode[] childNodes, string descriptionPrefix)
         {
             _childNodes = childNodes;
-            _isReactive = isReactive;
-
             _descriptionPrefix = descriptionPrefix;
         }
 
-        public override bool ReactiveEvaluation => true;
-
         protected abstract BehaviorNodeStatus ContinueStatus { get; }
+
+        protected abstract bool IsReactive { get; }
 
         protected int RunningChildIndex => Array.FindIndex(_childNodes,
             (childNode) => childNode.Status == BehaviorNodeStatus.Running);
@@ -31,21 +28,16 @@ namespace BananaParty.BehaviorTree
         {
             int previousRunningChildIndex = RunningChildIndex;
 
-            for (int childIterator = _isReactive || previousRunningChildIndex == -1 ? 0 : previousRunningChildIndex;
+            for (int childIterator = IsReactive || previousRunningChildIndex == -1 ? 0 : previousRunningChildIndex;
                 childIterator < _childNodes.Length; childIterator += 1)
             {
-                bool isReevaluationIteration = childIterator < previousRunningChildIndex;
-                if (isReevaluationIteration && !_childNodes[childIterator].ReactiveEvaluation)
-                    continue;
-
                 BehaviorNodeStatus childNodeStatus = _childNodes[childIterator].Execute(time);
 
                 if (childNodeStatus != ContinueStatus)
                 {
-                    if (isReevaluationIteration)
-                        for (int childToResetIterator = childIterator + 1;
-                            childToResetIterator <= previousRunningChildIndex; childToResetIterator += 1)
-                            _childNodes[childToResetIterator].Reset();
+                    for (int childToResetIterator = childIterator + 1;
+                        childToResetIterator <= previousRunningChildIndex; childToResetIterator += 1)
+                        _childNodes[childToResetIterator].Reset();
 
                     return childNodeStatus;
                 }
@@ -60,7 +52,7 @@ namespace BananaParty.BehaviorTree
                 child.Reset();
         }
 
-        public override string Name => $"{_descriptionPrefix}{base.Name}{(_isReactive ? '!' : string.Empty)}";
+        public override string Name => $"{_descriptionPrefix}{base.Name}";
 
         public override void WriteToGraph(ITreeGraph<IReadOnlyBehaviorNode> nodeGraph)
         {

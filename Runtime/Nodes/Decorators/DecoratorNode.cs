@@ -7,8 +7,6 @@
     {
         protected readonly IBehaviorNode ChildNode;
 
-        public override bool ReactiveEvaluation => true;
-
         public DecoratorNode(IBehaviorNode childNode)
         {
             ChildNode = childNode;

@@ -1,6 +1,6 @@
 ﻿namespace BananaParty.BehaviorTree
 {
-    public class ConstantNode : ActionNode
+    public class ConstantNode : BehaviorNode
     {
         private readonly BehaviorNodeStatus _statusToReturn;
 

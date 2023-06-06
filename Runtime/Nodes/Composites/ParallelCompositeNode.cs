@@ -9,8 +9,6 @@
 
         private readonly string _descriptionPrefix;
 
-        public override bool ReactiveEvaluation => false;
-
         public ParallelCompositeNode(IBehaviorNode[] childNodes, string descriptionPrefix)
         {
             ChildNodes = childNodes;

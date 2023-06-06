@@ -1,6 +1,6 @@
 ﻿namespace BananaParty.BehaviorTree
 {
-    public class WaitNode : ActionNode
+    public class WaitNode : BehaviorNode
     {
         private readonly long _duration;
 
