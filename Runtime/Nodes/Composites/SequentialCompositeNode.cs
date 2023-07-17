@@ -36,8 +36,13 @@ namespace BananaParty.BehaviorTree
                 if (childNodeStatus != ContinueStatus)
                 {
                     for (int childToResetIterator = childIterator + 1;
-                        childToResetIterator <= previousRunningChildIndex; childToResetIterator += 1)
-                        _childNodes[childToResetIterator].Reset();
+                        childToResetIterator < _childNodes.Length; childToResetIterator += 1)
+                    {
+                        if (_childNodes[childToResetIterator].Status != BehaviorNodeStatus.Idle)
+                            _childNodes[childToResetIterator].Reset();
+                        else
+                            break;
+                    }
 
                     return childNodeStatus;
                 }

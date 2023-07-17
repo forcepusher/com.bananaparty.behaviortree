@@ -64,5 +64,41 @@ namespace BananaParty.BehaviorTree.Tests
             Assert.IsTrue(firstReevaluatedCondition.ExecutionCount == 3);
             Assert.IsTrue(secondReevaluatedCondition.ExecutionCount == 3);
         }
+
+        [Test]
+        public void ShouldResetChildrenOnInterrupt()
+        {
+            var condition = new MutableConstantNode(BehaviorNodeStatus.Success);
+            var invocationTest = new InvocationTestNode(BehaviorNodeStatus.Success);
+
+            var behavior =
+            new ReactiveSequenceNode(new IBehaviorNode[]
+            {
+                condition,
+                invocationTest
+            });
+
+            behavior.Execute(1);
+
+            OutputGraph(behavior);
+
+            Assert.AreEqual(invocationTest.ExecutionCount, 1);
+
+            condition.NextExecutionStatus = BehaviorNodeStatus.Failure;
+
+            behavior.Execute(2);
+
+            OutputGraph(behavior);
+
+            Assert.AreEqual(invocationTest.ExecutionCount, 1);
+            Assert.AreEqual(BehaviorNodeStatus.Idle, invocationTest.Status);
+        }
+
+        private void OutputGraph(IBehaviorNode behavior)
+        {
+            var textGraph = new TextBehaviorTreeGraph("Test");
+            behavior.WriteToGraph(textGraph);
+            UnityEngine.Debug.Log(textGraph);
+        }
     }
 }

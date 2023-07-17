@@ -4,9 +4,9 @@
     {
         public int ExecutionCount { get; private set; } = 0;
 
-        public InvocationTestNode(BehaviorNodeStatus statusToReturn)
+        public InvocationTestNode(BehaviorNodeStatus initialStatus)
         {
-            Status = statusToReturn;
+            Status = initialStatus;
         }
 
         public override BehaviorNodeStatus OnExecute(long time)
