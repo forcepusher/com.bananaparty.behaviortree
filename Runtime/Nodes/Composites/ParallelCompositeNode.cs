@@ -5,13 +5,13 @@
     /// </remarks>
     public abstract class ParallelCompositeNode : BehaviorNode
     {
-        protected readonly IBehaviorNode[] ChildNodes;
+        private readonly IBehaviorNode[] _childNodes;
 
         private readonly string _descriptionPrefix;
 
         public ParallelCompositeNode(IBehaviorNode[] childNodes, string descriptionPrefix)
         {
-            ChildNodes = childNodes;
+            _childNodes = childNodes;
 
             _descriptionPrefix = descriptionPrefix;
         }
@@ -23,14 +23,14 @@
         public override BehaviorNodeStatus OnExecute(long time)
         {
             bool allNodesCompleted = true;
-            foreach (IBehaviorNode childNode in ChildNodes)
+            foreach (IBehaviorNode childNode in _childNodes)
             {
                 BehaviorNodeStatus childNodeStatus = childNode.Execute(time);
                 if (childNodeStatus != BehaviorNodeStatus.Running)
                 {
                     if (!ShouldContinueOnStatus(childNodeStatus))
                     {
-                        foreach (IBehaviorNode childNodeToReset in ChildNodes)
+                        foreach (IBehaviorNode childNodeToReset in _childNodes)
                             if (childNodeToReset != childNode)
                                 childNodeToReset.Reset();
 
@@ -51,8 +51,17 @@
 
         public override void OnReset()
         {
-            foreach (IBehaviorNode child in ChildNodes)
-                child.Reset();
+            foreach (IBehaviorNode child in _childNodes)
+            {
+                if (child.Status != BehaviorNodeStatus.Idle)
+                {
+                    child.Reset();
+                }
+                else
+                {
+                    break;
+                }
+            }
         }
 
         public override string Name => $"{_descriptionPrefix}{base.Name}";
@@ -61,8 +70,8 @@
         {
             base.WriteToGraph(nodeGraph);
 
-            nodeGraph.StartChildGroup(ChildNodes.Length);
-            foreach (IBehaviorNode childNode in ChildNodes)
+            nodeGraph.StartChildGroup(_childNodes.Length);
+            foreach (IBehaviorNode childNode in _childNodes)
                 childNode.WriteToGraph(nodeGraph);
             nodeGraph.EndChildGroup();
         }

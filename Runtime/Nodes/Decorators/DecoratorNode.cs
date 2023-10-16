@@ -14,7 +14,8 @@
 
         public override void OnReset()
         {
-            ChildNode.Reset();
+            if (ChildNode.Status != BehaviorNodeStatus.Idle)
+                ChildNode.Reset();
         }
 
         public override void WriteToGraph(ITreeGraph<IReadOnlyBehaviorNode> nodeGraph)

@@ -31,13 +31,16 @@
             if (time < _startTime + _timeThreshold)
                 return ChildNode.Execute(time);
 
-            ChildNode.Reset();
+            if (ChildNode.Status != BehaviorNodeStatus.Idle)
+                ChildNode.Reset();
+
             return BehaviorNodeStatus.Failure;
         }
 
         public override void OnReset()
         {
             _startTime = -1;
+            base.OnReset();
         }
     }
 }

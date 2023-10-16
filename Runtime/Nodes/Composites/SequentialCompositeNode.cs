@@ -54,7 +54,16 @@ namespace BananaParty.BehaviorTree
         public override void OnReset()
         {
             foreach (IBehaviorNode child in _childNodes)
-                child.Reset();
+            {
+                if (child.Status != BehaviorNodeStatus.Idle)
+                {
+                    child.Reset();
+                }
+                else
+                {
+                    break;
+                }
+            }
         }
 
         public override string Name => $"{_descriptionPrefix}{base.Name}";
