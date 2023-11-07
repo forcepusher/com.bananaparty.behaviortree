@@ -1,8 +1,9 @@
 {
   "name": "com.bananaparty.behaviortree",
-  "version": "5.1.0",
+  "version": "5.2.0",
   "type": "library",
   "displayName": "Behavior Tree",
   "unity": "2021.3",
-  "description": "Behavior tree implementation."
+  "description": "Behavior tree implementation.",
+  "author": "github.com/forcepusher"
 }
