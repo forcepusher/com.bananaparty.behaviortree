@@ -13,11 +13,11 @@ See minimum required Unity version in the `package.json` file.
 1. Code-oriented. Built using best OOP practices.  
 	- Trees are built by using nested constructors. Beware, it's all code.  
 2. There are only 2 node callbacks, `OnExecute` and `OnReset`.  
-	- Determining whether a node just started executing in `OnExecute` or being interrupted in `OnReset` is accomplished by comparing the current `BehaviorNode.Status`.  
+	- Determining whether a node just started executing in `OnExecute` or being interrupted in `OnReset` is accomplished by comparing the current `Node.Status`.  
 3. Reactive Evaluation/Conditional Aborts/Observer Aborts are implemented similarly to how it's done in [NodeCanvas](https://nodecanvas.paradoxnotion.com/documentation/?section=reactive-evaluation) rather than in [BehaviorDeisgner](https://opsive.com/support/documentation/behavior-designer/conditional-aborts/) or [UnrealEngine](https://www.kodeco.com/238-unreal-engine-4-tutorial-artificial-intelligence#toc-anchor-024).  
-	- It's as simple as all nodes being reevaluated every frame in `ReactiveSequenceNode` and `ReactiveSelectorNode`.  
+	- It's as simple as all nodes being reevaluated every frame in `ReactiveSequence` and `ReactiveSelector`.  
 4. No separation between Actions and Conditions.  
-	- In case of multiple Actions in a self-interrupting Sequence (`ReactiveSequenceNode`), you would need to group them togehter into an additional Sequence, so Actions aren't starting from the beginning every frame.  
+	- In case of multiple Actions in a self-interrupting Sequence (`ReactiveSequence`), you would need to group them togehter into an additional Sequence, so Actions aren't starting from the beginning every frame.  
 5. No such concept as a Blackboard.  
 	- Inject the classes (or their interfaces) you need to mutate via constructor. However, you can still write a DTO and use it as a Blackboard.  
 6. Text-based visualization.  

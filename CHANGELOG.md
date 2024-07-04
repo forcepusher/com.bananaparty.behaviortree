@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed `RollbackNodes`. This feature is completely cut from the package, since nobody used it.  
   
 ### Changed  
-- `Execute(long time)` is changed to `Execute(float deltaTime)`. Time parameter now has different semantics. It's Time.deltaTime rather Time.realTimeSinceStartup. Executing your tree should be like `behaviorTree.Execute(Time.deltaTime);`.  
+- `Execute(long time)` is changed to `Execute(float deltaTime)`. Time parameter now has different semantics. It's `Time.deltaTime` rather `Time.realTimeSinceStartup`. Executing your tree should be like `behaviorTree.Execute(Time.deltaTime);`.  
 - Renamed all standard nodes so they don't end with a `Node` word, as well as other similar renames to reduce constructor code length.  
 - Disabled NoEngineReferences option in assembly settings since it only made debugging more difficult.  
   
