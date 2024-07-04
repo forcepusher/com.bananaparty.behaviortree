@@ -5,12 +5,12 @@ Does not reference Unity Engine, so it could be used in a regular C# project.
   
 Make sure you have standalone [Git](https://git-scm.com/downloads) installed first. Reboot after installation.  
 In Unity, open "Window" -> "Package Manager".  
-Click the "+" sign on top left corner -> "Add package from git URL..."  
-Paste this: `https://github.com/forcepusher/com.bananaparty.behaviortree.git#5.2.0`  
+Click the "+" sign at the top left corner -> "Add package from git URL..."  
+Paste this: `https://github.com/forcepusher/com.bananaparty.behaviortree.git#6.0.0`  
 See minimum required Unity version in the `package.json` file.  
   
 ### Key differences from BehaviorTree in UnrealEngine, BehaviorDesigner, and NodeCanvas:  
-1. Strict OOP architecture and minimalism.  
+1. Code-oriented. Built using best OOP practices.  
 	- Trees are built by using nested constructors. Beware, it's all code.  
 2. There are only 2 node callbacks, `OnExecute` and `OnReset`.  
 	- Determining whether a node just started executing in `OnExecute` or being interrupted in `OnReset` is accomplished by comparing the current `BehaviorNode.Status`.  
@@ -22,8 +22,6 @@ See minimum required Unity version in the `package.json` file.
 	- Inject the classes (or their interfaces) you need to mutate via constructor. However, you can still write a DTO and use it as a Blackboard.  
 6. Text-based visualization.  
 	- Execution status of an entire tree could be viewed in a build.  
-7. Designed with [Prediction-Rollback](https://www.youtube.com/watch?v=0NLe4IpdS1w&t=91s) network code in mind.  
-	- You can write RollbackNodes utilizing the Memento pattern.  
   
 The library assumes that you're familiar with OOP and BehaviorTrees.  
 There are no Samples yet, refer to the Tests folder instead.
