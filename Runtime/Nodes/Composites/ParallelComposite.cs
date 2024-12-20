@@ -52,16 +52,8 @@
         public override void OnReset()
         {
             foreach (INode child in _childNodes)
-            {
                 if (child.Status != NodeStatus.Idle)
-                {
                     child.Reset();
-                }
-                else
-                {
-                    break;
-                }
-            }
         }
 
         public override string Name => $"{_descriptionPrefix}{base.Name}";

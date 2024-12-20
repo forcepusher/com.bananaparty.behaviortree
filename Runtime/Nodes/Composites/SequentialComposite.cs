@@ -56,13 +56,9 @@ namespace BananaParty.BehaviorTree
             foreach (INode child in _childNodes)
             {
                 if (child.Status != NodeStatus.Idle)
-                {
                     child.Reset();
-                }
                 else
-                {
                     break;
-                }
             }
         }
 
