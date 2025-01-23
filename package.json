@@ -1,6 +1,6 @@
 {
   "name": "com.bananaparty.behaviortree",
-  "version": "6.0.1",
+  "version": "6.0.2",
   "type": "library",
   "displayName": "Behavior Tree",
   "unity": "2021.3",

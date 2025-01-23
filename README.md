@@ -6,7 +6,7 @@ Does not reference Unity Engine, so it could be used in a regular C# project.
 Make sure you have standalone [Git](https://git-scm.com/downloads) installed first. Reboot after installation.  
 In Unity, open "Window" -> "Package Manager".  
 Click the "+" sign at the top left corner -> "Add package from git URL..."  
-Paste this: `https://github.com/forcepusher/com.bananaparty.behaviortree.git#6.0.1`  
+Paste this: `https://github.com/forcepusher/com.bananaparty.behaviortree.git#6.0.2`  
 See minimum required Unity version in the `package.json` file.  
   
 ### Key differences from BehaviorTree in UnrealEngine, BehaviorDesigner, and NodeCanvas:  

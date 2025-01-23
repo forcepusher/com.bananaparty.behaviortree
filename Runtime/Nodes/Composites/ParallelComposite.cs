@@ -25,7 +25,11 @@
             bool allNodesCompleted = true;
             foreach (INode childNode in _childNodes)
             {
+                if (childNode.Status > NodeStatus.Running)
+                    continue;
+
                 NodeStatus childNodeStatus = childNode.Execute(deltaTime);
+
                 if (childNodeStatus != NodeStatus.Running)
                 {
                     if (!ShouldContinueOnStatus(childNodeStatus))
