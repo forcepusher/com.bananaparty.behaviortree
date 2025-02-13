@@ -6,7 +6,7 @@ Does not reference Unity Engine, so it could be used in a regular C# project.
 Make sure you have standalone [Git](https://git-scm.com/downloads) installed first. Reboot after installation.  
 In Unity, open "Window" -> "Package Manager".  
 Click the "+" sign at the top left corner -> "Add package from git URL..."  
-Paste this: `https://github.com/forcepusher/com.bananaparty.behaviortree.git#6.0.2`  
+Paste this: `https://github.com/forcepusher/com.bananaparty.behaviortree.git#6.1.0`  
 See minimum required Unity version in the `package.json` file.  
   
 ### Key differences from BehaviorTree in UnrealEngine, BehaviorDesigner, and NodeCanvas:  
@@ -14,7 +14,7 @@ See minimum required Unity version in the `package.json` file.
 	- Trees are built by using nested constructors. Beware, it's all code.  
 2. There are only 2 node callbacks, `OnExecute` and `OnReset`.  
 	- Determining whether a node just started executing in `OnExecute` or being interrupted in `OnReset` is accomplished by comparing the current `Node.Status`.  
-3. Reactive Evaluation/Conditional Aborts/Observer Aborts are implemented similarly to how it's done in [NodeCanvas](https://nodecanvas.paradoxnotion.com/documentation/?section=reactive-evaluation) rather than in [BehaviorDeisgner](https://opsive.com/support/documentation/behavior-designer/conditional-aborts/) or [UnrealEngine](https://www.kodeco.com/238-unreal-engine-4-tutorial-artificial-intelligence#toc-anchor-024).  
+3. "Reactive Evaluation/Conditional Aborts/Observer Aborts" are implemented similarly to how it's done in [NodeCanvas](https://nodecanvas.paradoxnotion.com/documentation/?section=reactive-evaluation) rather than in [BehaviorDeisgner](https://opsive.com/support/documentation/behavior-designer/conditional-aborts/) or [UnrealEngine](https://www.kodeco.com/238-unreal-engine-4-tutorial-artificial-intelligence#toc-anchor-024).  
 	- It's as simple as all nodes being reevaluated every frame in `ReactiveSequence` and `ReactiveSelector`.  
 4. No separation between Actions and Conditions.  
 	- In case of multiple Actions in a self-interrupting Sequence (`ReactiveSequence`), you would need to group them togehter into an additional Sequence, so Actions aren't starting from the beginning every frame.  
