@@ -94,7 +94,10 @@ namespace BananaParty.BehaviorTree
 
         public override string ToString()
         {
-            return $"{Name}\n{_stringBuilder}";
+            if (string.IsNullOrEmpty(Name))
+                return _stringBuilder.ToString();
+            else
+                return $"{Name}\n{_stringBuilder}";
         }
     }
 }
